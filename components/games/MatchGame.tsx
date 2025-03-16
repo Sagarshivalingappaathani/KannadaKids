@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { RefreshCw, Trophy, Clock, ArrowRight, Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-type GameMode = 'letter-to-sound' | 'letter-to-image' | 'sound-to-word';
+type GameMode = 'letter-to-sound' | 'letter-to-word';
 
 type MatchItem = {
     id: string;
@@ -100,7 +100,7 @@ const KannadaMatchGame: React.FC = () => {
                     type: 'answer',
                     audio: letter.audio
                 });
-            } else if (gameMode === 'letter-to-image') {
+            } else if (gameMode === 'letter-to-word') {
                 // Match letter to a word starting with it
                 const example = letter.examples[0].split(' ')[0];
 
@@ -108,27 +108,6 @@ const KannadaMatchGame: React.FC = () => {
                     id: `prompt-${index}`,
                     value: letter.character,
                     displayValue: letter.character,
-                    matched: false,
-                    type: 'prompt',
-                    audio: letter.audio
-                });
-
-                newAnswers.push({
-                    id: `answer-${index}`,
-                    value: letter.character,
-                    displayValue: example,
-                    matched: false,
-                    type: 'answer',
-                    audio: letter.audio
-                });
-            } else if (gameMode === 'sound-to-word') {
-                // Match transliteration to a word example
-                const example = letter.examples[0].split(' ')[0];
-
-                newPrompts.push({
-                    id: `prompt-${index}`,
-                    value: letter.character,
-                    displayValue: letter.name,
                     matched: false,
                     type: 'prompt',
                     audio: letter.audio
@@ -262,8 +241,7 @@ const KannadaMatchGame: React.FC = () => {
                             disabled={gameActive}
                         >
                             <option value="letter-to-sound">Letter to Sound</option>
-                            <option value="letter-to-image">Letter to Word</option>
-                            <option value="sound-to-word">Sound to Word</option>
+                            <option value="letter-to-word">Letter to Word</option>
                         </select>
 
                         <select
@@ -300,9 +278,7 @@ const KannadaMatchGame: React.FC = () => {
                 <div className="bg-blue-50 p-4 rounded-lg mb-8 w-full max-w-2xl">
                     <h3 className="font-bold text-blue-700 mb-2">How to Play:</h3>
                     <p className="mb-2">
-                        Match each Kannada {gameMode === 'letter-to-sound' ? 'letter to its sound' :
-                            gameMode === 'letter-to-image' ? 'letter to a word' :
-                                'sound to the correct word'}.
+                        Match each Kannada {gameMode === 'letter-to-sound' ? 'letter to its sound' : 'letter to a word'}.
                     </p>
                     <p>Click on an item from each column to make a match!</p>
                     <p className="mt-2">Click the sound icon <Volume2 className="inline h-4 w-4" /> to hear pronunciation.</p>
@@ -315,46 +291,26 @@ const KannadaMatchGame: React.FC = () => {
                     {/* Prompts Column */}
                     <div className="flex-1">
                         <h3 className="text-center font-bold text-gray-700 mb-3">
-                            {gameMode === 'letter-to-sound' ? 'Kannada Letters' :
-                                gameMode === 'letter-to-image' ? 'Kannada Letters' :
-                                    'Kannada Sounds'}
+                            Kannada Letters
                         </h3>
                         <div className="space-y-3">
                             {prompts.map(prompt => (
                                 <div
                                     key={prompt.id}
                                     className={`
-                    p-4 rounded-lg cursor-pointer transition-all
-                    ${prompt.matched ? 'bg-green-100 border-2 border-green-300' :
+                                        p-4 rounded-lg cursor-pointer transition-all
+                                        ${prompt.matched ? 'bg-green-100 border-2 border-green-300' :
                                             selectedPrompt === prompt.id ? 'bg-yellow-100 border-2 border-yellow-300' :
                                                 'bg-white border-2 border-gray-200 hover:border-blue-300'}
-                    ${!gameActive ? 'opacity-70' : 'opacity-100'}
-                  `}
+                                        ${!gameActive ? 'opacity-70' : 'opacity-100'}
+                                    `}
                                     onClick={() => !prompt.matched && handleItemClick(prompt.id, 'prompt')}
                                 >
                                     <div className="flex justify-between items-center">
                                         <span className={`text-2xl font-baloo ${prompt.matched ? 'text-green-600' : 'text-gray-800'}`}>
                                             {prompt.displayValue}
                                         </span>
-                                        <div className="flex items-center">
-                                            {prompt.audio && (
-                                                <button
-                                                    className="mr-2 text-blue-500 hover:text-blue-700"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        playAudio(prompt.audio);
-                                                    }}
-                                                >
-                                                    <Volume2 className="h-5 w-5" />
-                                                </button>
-                                            )}
-                                            {selectedPrompt === prompt.id && !prompt.matched && (
-                                                <ArrowRight className="h-5 w-5 text-yellow-500" />
-                                            )}
-                                            {prompt.matched && (
-                                                <div className="bg-green-500 rounded-full h-5 w-5 flex items-center justify-center text-white text-xs">✓</div>
-                                            )}
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             ))}
@@ -364,19 +320,19 @@ const KannadaMatchGame: React.FC = () => {
                     {/* Answers Column */}
                     <div className="flex-1">
                         <h3 className="text-center font-bold text-gray-700 mb-3">
-                            {gameMode === 'letter-to-sound' ? 'Sounds' :
-                                gameMode === 'letter-to-image' ? 'Words' :
-                                    'Kannada Words'}
+                            {gameMode === 'letter-to-sound' ? 'Sounds' : 'Words'}
                         </h3>
                         <div className="space-y-3">
                             {answers.map(answer => (
                                 <div
                                     key={answer.id}
                                     className={`
-                    p-4 rounded-lg cursor-pointer transition-all
-                    ${answer.matched ? 'bg-white border-2 border-gray-200 hover:border-blue-300' : 'bg-white border-2 border-gray-200 hover:border-blue-300'}
-                    ${!gameActive ? 'opacity-70' : 'opacity-100'}
-                  `}
+                                        p-4 rounded-lg cursor-pointer transition-all
+                                        ${answer.matched ? 'bg-green-100 border-2 border-green-300' :
+                                            selectedAnswer === answer.id ? 'bg-yellow-100 border-2 border-yellow-300' :
+                                                'bg-white border-2 border-gray-200 hover:border-blue-300'}
+                                        ${!gameActive ? 'opacity-70' : 'opacity-100'}
+                                    `}
                                     onClick={() => !answer.matched && handleItemClick(answer.id, 'answer')}
                                 >
                                     <div className="flex justify-between items-center">
@@ -394,6 +350,9 @@ const KannadaMatchGame: React.FC = () => {
                                                 >
                                                     <Volume2 className="h-5 w-5" />
                                                 </button>
+                                            )}
+                                            {selectedAnswer === answer.id && !answer.matched && (
+                                                <ArrowRight className="h-5 w-5 text-yellow-500" />
                                             )}
                                             {answer.matched && (
                                                 <div className="bg-green-500 rounded-full h-5 w-5 flex items-center justify-center text-white text-xs">✓</div>
@@ -429,19 +388,19 @@ const KannadaMatchGame: React.FC = () => {
 
             {/* Add custom CSS for animations */}
             <style jsx global>{`
-        .animate-pop {
-          animation: pop 0.5s ease-out;
-        }
-        
-        @keyframes pop {
-          0% { transform: scale(0.8); opacity: 0; }
-          100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .font-baloo {
-          font-family: 'Baloo Tamma 2', 'Noto Sans Kannada', sans-serif;
-        }
-      `}</style>
+                .animate-pop {
+                    animation: pop 0.5s ease-out;
+                }
+                
+                @keyframes pop {
+                    0% { transform: scale(0.8); opacity: 0; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+                
+                .font-baloo {
+                    font-family: 'Baloo Tamma 2', 'Noto Sans Kannada', sans-serif;
+                }
+            `}</style>
         </div>
     );
 };
