@@ -368,10 +368,12 @@ function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, 
       lastY = coords.y;
       
       // Start a new point (for better dot drawing)
-      ctx.beginPath();
-      ctx.arc(lastX, lastY, penSize / 2, 0, Math.PI * 2);
-      ctx.fillStyle = penColor;
-      ctx.fill();
+      if (ctx) {
+        ctx.beginPath();
+        ctx.arc(lastX, lastY, penSize / 2, 0, Math.PI * 2);
+        ctx.fillStyle = penColor;
+        ctx.fill();
+      }
     }
 
     function draw(e: MouseEvent | TouchEvent) {
@@ -383,14 +385,16 @@ function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, 
       const y = coords.y;
       
       // Draw line
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(x, y);
-      ctx.strokeStyle = penColor;
-      ctx.lineWidth = penSize;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.stroke();
+      if (ctx) {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = penColor;
+        ctx.lineWidth = penSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      }
       
       lastX = x;
       lastY = y;
