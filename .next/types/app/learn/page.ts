@@ -1,4 +1,4 @@
-// File: /home/sagar0418/test/funkanada/app/learn/page.tsx
+// File: /home/sagar0418/Academics/6th sem/HCI/funkanada/app/learn/page.tsx
 import * as entry from '../../../../app/learn/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
