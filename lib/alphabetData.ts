@@ -113,5 +113,21 @@ export const kannadaAlphabet: KannadaLetter[] = [
     examples: ["ಔಷಧ (aushadha) - medicine", "ಔದಾರ್ಯ (audarya) - generosity"],
     category: "vowel"
   },
-  
+  {
+    id: "vowel-am",
+    character: "ಅಂ",
+    name: "am",
+    pronunciation: "nasal 'am' sound, like 'um' in Sanskrit",
+    examples: ["ಕಂಪ (kampa) - tremor", "ಹಂಸ (hamsa) - swan"],
+    category: "vowel"
+  },
+  {
+      id: "vowel-ah",
+      character: "ಅಃ",
+      name: "ah",
+      pronunciation: "hard 'ah' sound, often indicating emphasis or exclamation",
+      examples: ["ಬುದ್ಧಿಃ (buddhiḥ) - intelligence", "ದತ್ತಃ (dattaḥ) - given"],
+      category: "vowel"
+  }
+
 ];

@@ -71,10 +71,9 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
             
             // If user has previously completed this letter, start at quiz step
             if (data.completed) {
-              setCurrentStep(3);
+              setCurrentStep(0); // start from first
             } else if (data.mastery_level > 0) {
-              // If user has started but not completed, go to the appropriate step
-              setCurrentStep(Math.min(data.mastery_level, 2));
+              setCurrentStep(data.mastery_level); // start from where u left
             }
           }
         } catch (error) {
@@ -247,16 +246,11 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
 }
 
 function LearnStep({ letter, setCurrentStep }: any) {
+
   const playAudio = () => {
-    if (letter.audioUrl) {
-      const audio = new Audio(letter.audioUrl);
-      audio.play().catch(e => console.error('Audio playback error:', e));
-    } else {
-      // Fallback using speech synthesis if no audio URL
-      const utterance = new SpeechSynthesisUtterance(letter.pronunciation);
-      utterance.lang = 'kn-IN'; // Kannada language code
-      speechSynthesis.speak(utterance);
-    }
+    console.log(letter.character)
+    const audio = new Audio(`/Audios/Kannada-audio-clips/${letter.name}.mp3`);
+    audio.play().catch(error => console.error("Error playing audio:", error));
   };
 
   return (
@@ -353,7 +347,7 @@ function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw letter as guide (faded)
-    const fontSize = Math.min(canvas.width, canvas.height) * 0.6;
+    const fontSize = Math.min(canvas.width, canvas.height) * 0.8;
     ctx.font = `bold ${fontSize}px 'Noto Sans Kannada', sans-serif`;
     ctx.fillStyle = `rgba(0, 0, 0, ${guideOpacity})`;
     ctx.textAlign = 'center';
@@ -452,7 +446,7 @@ function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, 
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Reload guide letter
-      const fontSize = Math.min(canvas.width, canvas.height) * 0.6;
+      const fontSize = Math.min(canvas.width, canvas.height) * 0.4;
       ctx.font = `bold ${fontSize}px 'Noto Sans Kannada', sans-serif`;
       ctx.fillStyle = `rgba(0, 0, 0, ${guideOpacity})`;
       ctx.textAlign = 'center';
