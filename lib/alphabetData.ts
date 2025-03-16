@@ -19,6 +19,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/1.mp3"
   },
+  
   {
     id: "vowel-aa",
     character: "ಆ",
@@ -127,6 +128,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/13.mp3"
   },
+  
   {
     id: "vowel-am",
     character: "ಅಂ",
