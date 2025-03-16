@@ -129,4 +129,22 @@ export const kannadaAlphabet: KannadaLetter[] = [
     audio: "/audio/13.mp3"
   },
   
+  {
+    id: "vowel-am",
+    character: "ಅಂ",
+    name: "am",
+    pronunciation: "am as in 'umbrella' (nasalized sound)",
+    examples: ["ಹಂಸ (hamsa) - swan", "ಸಂತೋಷ (santosha) - happiness"],
+    category: "vowel",
+    audio: "/audio/14.mp3"
+  },
+  {
+    id: "vowel-ahh",
+    character: "ಅಃ",
+    name: "ahh",
+    pronunciation: "ahh as in 'aha!' (breathy sound)",
+    examples: ["ನಮಃ (namah) - salutation", "ಶಾಂತಿಃ (shantih) - peace"],
+    category: "vowel",
+    audio: "/audio/15.mp3"
+  }
 ];
