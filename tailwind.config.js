@@ -60,6 +60,7 @@ module.exports = {
         "kid-blue": "hsl(var(--kid-blue))",
         "kid-green": "hsl(var(--kid-green))",
         "kid-orange": "hsl(var(--kid-orange))",
+        "kid-yellow": "hsl(var(--kid-yellow))",
       },
       borderRadius: {
         lg: "var(--radius)",

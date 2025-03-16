@@ -3,11 +3,10 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import PuzzleGame from '@/components/games/PuzzleGame';
 import MemoryGame from '@/components/games/MemoryGame';
 import MatchGame from '@/components/games/MatchGame';
+import PictureWord from '@/components/games/PictureWord';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from '@/components/NavBar'
 
@@ -51,16 +50,23 @@ const PlayPage = () => {
                 title="Memory Match"
                 description="Match pairs of Kannada letters and pictures"
                 color="from-kid-blue/20 to-kid-green/20"
-                icon="🔤"
+                icon="🎮"
                 onClick={() => setSelectedGame('memory')}
               />
               
               <GameCard 
                 title="Letter Match"
                 description="Match Kannada letters with their corresponding images"
-                color="from-kid-purple/20 to-kid-blue/20"
-                icon="🔤"
+                color="from-kid-orange/20 to-kid-blue/20"
+                icon="🕹️"
                 onClick={() => setSelectedGame('match')}
+              />
+              <GameCard 
+                title="Picture Word"
+                description="Match Kannada letters with their corresponding pictures"
+                color="from-kid-purple/20 to-kid-blue/20"
+                icon="🖼️"
+                onClick={() => setSelectedGame('picture')}
               />
             </div>
           </TabsContent>
@@ -71,8 +77,15 @@ const PlayPage = () => {
                 title="Memory Match"
                 description="Match pairs of Kannada letters and pictures"
                 color="from-kid-blue/20 to-kid-green/20"
-                icon="🔤"
+                icon="🎮"
                 onClick={() => setSelectedGame('memory')}
+              />
+              <GameCard 
+                title="Picture Word"
+                description="Match Kannada letters with their corresponding pictures"
+                color="from-kid-purple/20 to-kid-blue/20"
+                icon="🖼️"
+                onClick={() => setSelectedGame('picture')}
               />
             </div>
           </TabsContent>
@@ -90,8 +103,8 @@ const PlayPage = () => {
               <GameCard 
                 title="Letter Match"
                 description="Match Kannada letters with their corresponding images"
-                color="from-kid-purple/20 to-kid-blue/20"
-                icon="🔤"
+                color="from-kid-orange/20 to-kid-blue/20"
+                icon="🕹️"
                 onClick={() => setSelectedGame('match')}
               />
             </div>
@@ -106,6 +119,7 @@ const PlayPage = () => {
                 {selectedGame === 'puzzle' && 'Letter Puzzle'}
                 {selectedGame === 'memory' && 'Memory Match'}
                 {selectedGame === 'match' && 'Letter Match'}
+                {selectedGame === 'picture' && 'Picture Word'}
               </h2>
               <Button 
                 variant="outline" 
@@ -120,6 +134,7 @@ const PlayPage = () => {
               {selectedGame === 'puzzle' && <PuzzleGame />}
               {selectedGame === 'memory' && <MemoryGame />}
               {selectedGame === 'match' && <MatchGame />}
+              {selectedGame === 'picture' && <PictureWord/>}
             </div>
           </div>
         )}

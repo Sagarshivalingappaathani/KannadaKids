@@ -7,6 +7,9 @@ export type KannadaLetter = {
   examples: string[];
   category: string;
   audio: string;
+  word: string;
+  image: string;
+  transliteration: string;      
 };
 
 export const kannadaAlphabet: KannadaLetter[] = [
@@ -17,7 +20,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "a as in 'america'",
     examples: ["ಅಮ್ಮ (amma) - mother", "ಅಪ್ಪ (appa) - father"],
     category: "vowel",
-    audio: "/audio/1.mp3"
+    audio: "/audio/1.mp3",
+    word: 'ಅಪ್ಪ',
+    image: '/images/words/1.jpg',
+    transliteration: 'appa (father)',
   },
   
   {
@@ -27,7 +33,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "aa as in 'art'",
     examples: ["ಆನೆ (aane) - elephant", "ಆಕಾಶ (aakaasha) - sky"],
     category: "vowel",
-    audio: "/audio/2.mp3"
+    audio: "/audio/2.mp3",
+    word: 'ಆನೆ',
+    image: '/images/words/2.jpg',
+    transliteration: 'aane (elephant)',
   },
   {
     id: "vowel-i",
@@ -36,7 +45,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "i as in 'in'",
     examples: ["ಇಲಿ (ili) - rat", "ಇದು (idu) - this"],
     category: "vowel",
-    audio: "/audio/3.mp3"
+    audio: "/audio/3.mp3",
+    word: 'ಇಲಿ',
+    image: '/images/words/3.jpg',
+    transliteration: 'ili (mouse)',
   },
   {
     id: "vowel-ii",
@@ -45,7 +57,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ee as in 'eat'",
     examples: ["ಈಶ್ವರ (eeshwara) - god", "ಈಗ (eega) - now"],
     category: "vowel",
-    audio: "/audio/4.mp3"
+    audio: "/audio/4.mp3",
+    word: 'ಈಶ್ವರ',
+    image: '/images/words/4.jpg',
+    transliteration: 'eeshwar (god)',
   },
   {
     id: "vowel-u",
@@ -54,7 +69,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "u as in 'put'",
     examples: ["ಉಪ್ಪು (uppu) - salt", "ಉಡುಗೆ (uduge) - clothes"],
     category: "vowel",
-    audio: "/audio/5.mp3"
+    audio: "/audio/5.mp3",
+    word: 'ಉಪ್ಪು',
+    image: '/images/words/5.jpg',
+    transliteration: 'uppu (soup)',
   },
   {
     id: "vowel-uu",
@@ -63,7 +81,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "oo as in 'food'",
     examples: ["ಊಟ (oota) - meal", "ಊರು (ooru) - village"],
     category: "vowel",
-    audio: "/audio/6.mp3"
+    audio: "/audio/6.mp3",
+    word: 'ಊಟ',
+    image: '/images/words/6.jpg',
+    transliteration: 'oot (food)',
   },
   {
     id: "vowel-ru",
@@ -72,7 +93,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ru as in 'ruby'",
     examples: ["ಋಷಿ (rushi) - sage", "ಋತು (rutu) - season"],
     category: "vowel",
-    audio: "/audio/7.mp3"
+    audio: "/audio/7.mp3",
+    word: 'ಋಷಿ',
+    image: '/images/words/7.jpg',
+    transliteration: 'rishi (teacher)',
   },
   {
     id: "vowel-e",
@@ -81,7 +105,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "e as in 'egg'",
     examples: ["ಎಲೆ (ele) - leaf", "ಎಳು (elu) - seven"],
     category: "vowel",
-    audio: "/audio/8.mp3"
+    audio: "/audio/8.mp3",
+    word: 'ಎಲೆ',
+    image: '/images/words/8.jpg',
+    transliteration: 'ele (leaf)',
   },
   {
     id: "vowel-ee",
@@ -90,7 +117,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ay as in 'day'",
     examples: ["ಏಣಿ (eni) - ladder", "ಏನು (enu) - what"],
     category: "vowel",
-    audio: "/audio/9.mp3"
+    audio: "/audio/9.mp3",
+    word: 'ಏಣಿ',
+    image: '/images/words/9.jpg',
+    transliteration: 'ene (river)',
   },
   {
     id: "vowel-ai",
@@ -99,7 +129,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ai as in 'aisle'",
     examples: ["ಐದು (aidu) - five", "ಐಸ್ (ais) - ice"],
     category: "vowel",
-    audio: "/audio/10.mp3"
+    audio: "/audio/10.mp3",
+    word: 'ಐದು',
+    image: '/images/words/10.jpg',
+    transliteration: 'aidu (five)',
   },
   {
     id: "vowel-o",
@@ -108,7 +141,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "o as in 'hot'",
     examples: ["ಒಂದು (ondu) - one", "ಒಳ್ಳೆಯ (olleya) - good"],
     category: "vowel",
-    audio: "/audio/11.mp3"
+    audio: "/audio/11.mp3",
+    word: 'ಒಂದು',
+    image: '/images/words/11.jpg',
+    transliteration: 'oondu (one)',
   },
   {
     id: "vowel-oo",
@@ -117,7 +153,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "o as in 'over'",
     examples: ["ಓದು (odu) - read", "ಓಟ (ota) - run"],
     category: "vowel",
-    audio: "/audio/12.mp3"
+    audio: "/audio/12.mp3",
+    word: 'ಓದು',
+    image: '/images/words/12.jpg',
+    transliteration: 'oodu (read)',
   },
   {
     id: "vowel-au",
@@ -126,7 +165,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ou as in 'out'",
     examples: ["ಔಷಧ (aushadha) - medicine", "ಔದಾರ್ಯ (audarya) - generosity"],
     category: "vowel",
-    audio: "/audio/13.mp3"
+    audio: "/audio/13.mp3",
+    word: 'ಔಷಧ',
+    image: '/images/words/13.jpg',
+    transliteration: 'aushadha (medicine)',
   },
   
   {
@@ -136,7 +178,10 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "am as in 'umbrella' (nasalized sound)",
     examples: ["ಹಂಸ (hamsa) - swan", "ಸಂತೋಷ (santosha) - happiness"],
     category: "vowel",
-    audio: "/audio/14.mp3"
+    audio: "/audio/14.mp3",
+    word: 'ಹಂಸ',
+    image: '/images/words/14.jpg',
+    transliteration: 'hans (horse)',
   },
   {
     id: "vowel-ahh",
@@ -145,6 +190,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     pronunciation: "ahh as in 'aha!' (breathy sound)",
     examples: ["ನಮಃ (namah) - salutation", "ಶಾಂತಿಃ (shantih) - peace"],
     category: "vowel",
-    audio: "/audio/15.mp3"
+    audio: "/audio/15.mp3",
+    word: 'ನಮಃ',
+    image: '/images/words/15.jpg',
+    transliteration: 'namah (salutation)',
   }
 ];

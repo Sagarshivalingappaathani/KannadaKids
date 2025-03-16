@@ -70,6 +70,7 @@ export default {
 				'kid-yellow': '#FFD166',
 				'kid-orange': '#FF9B71',
 				'kid-pink': '#FF71A3',
+				'kid-red': '#FF5F5F',
 			},
 			fontFamily: {
 				'baloo': ['"Baloo 2"', 'cursive'],

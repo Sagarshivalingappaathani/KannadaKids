@@ -178,7 +178,7 @@ const KannadaMatchGame: React.FC = () => {
                     ));
 
                     // Play success sound
-                    const successSound = new Audio('/sounds/success.mp3');
+                    const successSound = new Audio('/audio/success.mp3');
                     successSound.play().catch(error => {
                         console.error("Success sound playback failed:", error);
                     });
@@ -199,7 +199,7 @@ const KannadaMatchGame: React.FC = () => {
                     }
                 } else {
                     // Play error sound
-                    const errorSound = new Audio('/sounds/error.mp3');
+                    const errorSound = new Audio('/audio/error.mp3');
                     errorSound.play().catch(error => {
                         console.error("Error sound playback failed:", error);
                     });

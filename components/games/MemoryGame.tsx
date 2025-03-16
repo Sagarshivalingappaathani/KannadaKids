@@ -35,19 +35,19 @@ const MemoryGame: React.FC = () => {
     setMoves(0);
     setGameComplete(false);
     setGameStarted(false);
-    
+
     // Determine number of pairs based on difficulty
     let numPairs = 4; // easy
     if (difficulty === 'medium') numPairs = 6;
     if (difficulty === 'hard') numPairs = 8;
-    
+
     // Get random letters from the alphabet
     const shuffledAlphabet = [...kannadaAlphabet].sort(() => Math.random() - 0.5);
     const selectedLetters = shuffledAlphabet.slice(0, numPairs);
-    
+
     // Create pairs of cards (letter and word example)
     const newCards: Card[] = [];
-    
+
     selectedLetters.forEach((letter, index) => {
       // Letter card
       newCards.push({
@@ -57,7 +57,7 @@ const MemoryGame: React.FC = () => {
         matched: false,
         type: 'letter'
       });
-      
+
       // Word example card (using first example)
       const example = letter.examples[0].split(' ')[0];
       newCards.push({
@@ -68,7 +68,7 @@ const MemoryGame: React.FC = () => {
         type: 'word'
       });
     });
-    
+
     // Shuffle cards
     const shuffledCards = [...newCards].sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
@@ -78,57 +78,57 @@ const MemoryGame: React.FC = () => {
     // Ignore if game is complete or card is already matched
     const clickedCard = cards.find(card => card.id === id);
     if (!clickedCard || clickedCard.matched || gameComplete) return;
-    
+
     // Ignore if two cards already flipped or clicking on already flipped card
     if (flippedCards.length === 2 || flippedCards.includes(id)) return;
-    
+
     if (!gameStarted) {
       setGameStarted(true);
     }
-    
+
     // Update flipped cards
     const newFlippedCards = [...flippedCards, id];
     setFlippedCards(newFlippedCards);
-    
+
     // Flip this card
-    const newCards = cards.map(card => 
+    const newCards = cards.map(card =>
       card.id === id ? { ...card, flipped: true } : card
     );
     setCards(newCards);
-    
+
     // If we have 2 cards flipped, check for a match
     if (newFlippedCards.length === 2) {
       setMoves(prev => prev + 1);
-      
+
       // Get both flipped cards
       const firstCardId = newFlippedCards[0];
       const secondCardId = newFlippedCards[1];
-      
+
       const firstCard = newCards.find(card => card.id === firstCardId);
       const secondCard = newCards.find(card => card.id === secondCardId);
-      
+
       if (!firstCard || !secondCard) return;
-      
+
       // Check if it's a letter-word pair match
-      const isMatch = 
-        (firstCard.type === 'letter' && secondCard.type === 'word' && 
-         firstCard.id.split('-')[1] === secondCard.id.split('-')[1]) ||
-        (firstCard.type === 'word' && secondCard.type === 'letter' && 
-         firstCard.id.split('-')[1] === secondCard.id.split('-')[1]);
-      
+      const isMatch =
+        (firstCard.type === 'letter' && secondCard.type === 'word' &&
+          firstCard.id.split('-')[1] === secondCard.id.split('-')[1]) ||
+        (firstCard.type === 'word' && secondCard.type === 'letter' &&
+          firstCard.id.split('-')[1] === secondCard.id.split('-')[1]);
+
       if (isMatch) {
         // Mark cards as matched
-        const matchedCards = newCards.map(card => 
-          card.id === firstCardId || card.id === secondCardId 
-            ? { ...card, matched: true } 
+        const matchedCards = newCards.map(card =>
+          card.id === firstCardId || card.id === secondCardId
+            ? { ...card, matched: true }
             : card
         );
-        
+
         const newMatchCount = matches + 1;
         setMatches(newMatchCount);
         setCards(matchedCards);
         setFlippedCards([]);
-        
+
         // Check if game is complete
         const totalPairs = matchedCards.length / 2;
         if (newMatchCount === totalPairs) {
@@ -139,13 +139,18 @@ const MemoryGame: React.FC = () => {
             spread: 70,
             origin: { y: 0.6 }
           });
+
+          const successSound = new Audio('/audio/success.mp3');
+          successSound.play().catch(error => {
+            console.error("Success sound playback failed:", error);
+          });
         }
       } else {
         // Not a match, flip back after delay
         setTimeout(() => {
-          const resetCards = newCards.map(card => 
-            (card.id === firstCardId || card.id === secondCardId) && !card.matched 
-              ? { ...card, flipped: false } 
+          const resetCards = newCards.map(card =>
+            (card.id === firstCardId || card.id === secondCardId) && !card.matched
+              ? { ...card, flipped: false }
               : card
           );
           setCards(resetCards);
@@ -181,9 +186,9 @@ const MemoryGame: React.FC = () => {
             <div className="text-2xl font-bold">{moves}</div>
           </div>
         </div>
-        
+
         <div className="space-y-3">
-          <select 
+          <select
             className="block w-full p-2 border rounded"
             value={difficulty}
             onChange={(e) => setDifficulty(e.target.value as 'easy' | 'medium' | 'hard')}
@@ -193,7 +198,7 @@ const MemoryGame: React.FC = () => {
             <option value="medium">Medium (6 pairs)</option>
             <option value="hard">Hard (8 pairs)</option>
           </select>
-          
+
           <Button
             variant="outline"
             onClick={startNewGame}
@@ -204,7 +209,7 @@ const MemoryGame: React.FC = () => {
           </Button>
         </div>
       </div>
-      
+
       {/* Game Board */}
       <div className={`grid ${getGridClass()} gap-4 w-full max-w-xl mx-auto`}>
         {cards.map(card => (
@@ -231,7 +236,7 @@ const MemoryGame: React.FC = () => {
                 <span className="text-xl font-baloo">{card.content}</span>
               )}
             </div>
-            
+
             {/* Card Back */}
             <div className={`
               absolute inset-0 bg-gradient-to-br from-kid-purple/10 to-kid-blue/10
@@ -245,7 +250,7 @@ const MemoryGame: React.FC = () => {
           </div>
         ))}
       </div>
-      
+
       {/* Game Complete Overlay */}
       {gameComplete && (
         <div className="mt-8 bg-green-50 border border-green-200 rounded-xl p-6 animate-pop w-full">
@@ -263,7 +268,7 @@ const MemoryGame: React.FC = () => {
           </Button>
         </div>
       )}
-      
+
       {/* Add custom CSS for 3D card flipping effect */}
       <style jsx global>{`
         .rotate-y-0 {

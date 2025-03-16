@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Shuffle, Check, AlertCircle, Award, ArrowRight } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import type { KannadaLetter } from '@/lib/alphabetData';
+import confetti from 'canvas-confetti';
 
 const AlphabetOrderingGame: React.FC = () => {
   const [letters, setLetters] = useState<KannadaLetter[]>([]);
@@ -58,6 +59,7 @@ const AlphabetOrderingGame: React.FC = () => {
     });
   };
   
+
   // Handle drag start
   const handleDragStart = (e: React.DragEvent, letter: KannadaLetter, index: number) => {
     setDraggedLetter(letter);
@@ -68,6 +70,12 @@ const AlphabetOrderingGame: React.FC = () => {
     if (e.currentTarget instanceof HTMLElement) {
       e.currentTarget.style.opacity = '0.4';
       e.dataTransfer.effectAllowed = 'move';
+      const dragSound = new Audio('/audio/drag.mp3');
+      dragSound.play();
+      setTimeout(() => {
+        dragSound.pause();
+        dragSound.currentTime = 0;
+      }, 2000); 
     }
   };
   
@@ -144,6 +152,16 @@ const AlphabetOrderingGame: React.FC = () => {
       setScore(score + pointsEarned);
       setShowSuccess(true);
       
+      const successSound = new Audio('/audio/success.mp3');
+      successSound.play().catch(error => {
+        console.error("Success sound playback failed:", error);
+      });
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
       toast({
         title: "Correct Order!",
         description: `You earned ${pointsEarned} points! Moving to next level...`,
@@ -188,6 +206,10 @@ const AlphabetOrderingGame: React.FC = () => {
         }
       }, 3000);
     } else {
+      const errorSound = new Audio('/audio/error.mp3');
+      errorSound.play().catch(error => {
+        console.error("Error sound playback failed:", error);
+      });
       toast({
         title: "Not quite right",
         description: "Try rearranging the letters again",
