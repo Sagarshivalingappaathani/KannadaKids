@@ -6,6 +6,7 @@ export type KannadaLetter = {
   pronunciation: string;
   examples: string[];
   category: string;
+  audio: string;
 };
 
 export const kannadaAlphabet: KannadaLetter[] = [
@@ -15,7 +16,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "a",
     pronunciation: "a as in 'america'",
     examples: ["ಅಮ್ಮ (amma) - mother", "ಅಪ್ಪ (appa) - father"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/1.mp3"
   },
   {
     id: "vowel-aa",
@@ -23,7 +25,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "aa",
     pronunciation: "aa as in 'art'",
     examples: ["ಆನೆ (aane) - elephant", "ಆಕಾಶ (aakaasha) - sky"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/2.mp3"
   },
   {
     id: "vowel-i",
@@ -31,7 +34,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "i",
     pronunciation: "i as in 'in'",
     examples: ["ಇಲಿ (ili) - rat", "ಇದು (idu) - this"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/3.mp3"
   },
   {
     id: "vowel-ii",
@@ -39,7 +43,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "ii",
     pronunciation: "ee as in 'eat'",
     examples: ["ಈಶ್ವರ (eeshwara) - god", "ಈಗ (eega) - now"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/4.mp3"
   },
   {
     id: "vowel-u",
@@ -47,7 +52,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "u",
     pronunciation: "u as in 'put'",
     examples: ["ಉಪ್ಪು (uppu) - salt", "ಉಡುಗೆ (uduge) - clothes"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/5.mp3"
   },
   {
     id: "vowel-uu",
@@ -55,7 +61,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "uu",
     pronunciation: "oo as in 'food'",
     examples: ["ಊಟ (oota) - meal", "ಊರು (ooru) - village"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/6.mp3"
   },
   {
     id: "vowel-ru",
@@ -63,7 +70,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "ru",
     pronunciation: "ru as in 'ruby'",
     examples: ["ಋಷಿ (rushi) - sage", "ಋತು (rutu) - season"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/7.mp3"
   },
   {
     id: "vowel-e",
@@ -71,7 +79,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "e",
     pronunciation: "e as in 'egg'",
     examples: ["ಎಲೆ (ele) - leaf", "ಎಳು (elu) - seven"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/8.mp3"
   },
   {
     id: "vowel-ee",
@@ -79,7 +88,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "ee",
     pronunciation: "ay as in 'day'",
     examples: ["ಏಣಿ (eni) - ladder", "ಏನು (enu) - what"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/9.mp3"
   },
   {
     id: "vowel-ai",
@@ -87,7 +97,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "ai",
     pronunciation: "ai as in 'aisle'",
     examples: ["ಐದು (aidu) - five", "ಐಸ್ (ais) - ice"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/10.mp3"
   },
   {
     id: "vowel-o",
@@ -95,7 +106,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "o",
     pronunciation: "o as in 'hot'",
     examples: ["ಒಂದು (ondu) - one", "ಒಳ್ಳೆಯ (olleya) - good"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/11.mp3"
   },
   {
     id: "vowel-oo",
@@ -103,7 +115,8 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "oo",
     pronunciation: "o as in 'over'",
     examples: ["ಓದು (odu) - read", "ಓಟ (ota) - run"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/12.mp3"
   },
   {
     id: "vowel-au",
@@ -111,7 +124,16 @@ export const kannadaAlphabet: KannadaLetter[] = [
     name: "au",
     pronunciation: "ou as in 'out'",
     examples: ["ಔಷಧ (aushadha) - medicine", "ಔದಾರ್ಯ (audarya) - generosity"],
-    category: "vowel"
+    category: "vowel",
+    audio: "/audio/13.mp3"
   },
-  
+  {
+    id: "vowel-au4",
+    character: "ಔ",
+    name: "au",
+    pronunciation: "ou as in 'out'",
+    examples: ["ಔಷಧ (aushadha) - medicine", "ಔದಾರ್ಯ (audarya) - generosity"],
+    category: "vowel",
+    audio: "/audio/14.mp3"
+  }
 ];
