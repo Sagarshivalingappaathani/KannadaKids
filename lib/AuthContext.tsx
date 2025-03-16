@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           ]);
 
         if (profileError) {
-          console.error('Error creating user profile:', profileError);
+          console.log('Error creating user profile:', profileError);
         }
       }
 
