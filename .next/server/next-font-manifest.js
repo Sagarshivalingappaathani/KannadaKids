@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/home/sagar0418/test/funkanada/app/layout\":[\"static/media/d86cb100f71d6b8d-s.p.woff2\",\"static/media/21ed5661b47f7f6d-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
