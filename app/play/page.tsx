@@ -7,6 +7,9 @@ import PuzzleGame from '@/components/games/PuzzleGame';
 import MemoryGame from '@/components/games/MemoryGame';
 import MatchGame from '@/components/games/MatchGame';
 import PictureWord from '@/components/games/PictureWord';
+import JigsawGame from '@/components/games/Jigsaw';
+import LetterCatch from '@/components/games/LetterCatch';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from '@/components/NavBar'
 
@@ -68,6 +71,20 @@ const PlayPage = () => {
                 icon="🖼️"
                 onClick={() => setSelectedGame('picture')}
               />
+              <GameCard 
+                title="Jigsaw"
+                description="Drag and drop puzzle pieces to form Kannada letters"
+                color="from-kid-blue/20 to-kid-green/20"
+                icon="🧩"
+                onClick={() => setSelectedGame('jigsaw')}
+              />
+              <GameCard 
+                title="Letter Catch"
+                description="Catch the falling Kannada letters"
+                color="from-kid-purple/20 to-kid-blue/20"
+                icon="🎮"
+                onClick={() => setSelectedGame('letter-catch')}
+              />
             </div>
           </TabsContent>
           
@@ -86,6 +103,13 @@ const PlayPage = () => {
                 color="from-kid-purple/20 to-kid-blue/20"
                 icon="🖼️"
                 onClick={() => setSelectedGame('picture')}
+              />
+              <GameCard 
+                title="Jigsaw"
+                description="Drag and drop puzzle pieces to form Kannada letters"
+                color="from-kid-purple/20 to-kid-green/20"
+                icon="🧩"
+                onClick={() => setSelectedGame('jigsaw')}
               />
             </div>
           </TabsContent>
@@ -107,6 +131,13 @@ const PlayPage = () => {
                 icon="🕹️"
                 onClick={() => setSelectedGame('match')}
               />
+              <GameCard 
+                title="Letter Catch"
+                description="Catch the falling Kannada letters"
+                color="from-kid-purple/20 to-kid-blue/20"
+                icon="🎮"
+                onClick={() => setSelectedGame('letter-catch')}
+              />
             </div>
           </TabsContent>
         </Tabs>
@@ -120,6 +151,8 @@ const PlayPage = () => {
                 {selectedGame === 'memory' && 'Memory Match'}
                 {selectedGame === 'match' && 'Letter Match'}
                 {selectedGame === 'picture' && 'Picture Word'}
+                {selectedGame === 'jigsaw' && 'Jigsaw'}
+                {selectedGame === 'letter-catch' && 'Letter Catch'}
               </h2>
               <Button 
                 variant="outline" 
@@ -135,6 +168,8 @@ const PlayPage = () => {
               {selectedGame === 'memory' && <MemoryGame />}
               {selectedGame === 'match' && <MatchGame />}
               {selectedGame === 'picture' && <PictureWord/>}
+              {selectedGame === 'jigsaw' && <JigsawGame />}
+              {selectedGame === 'letter-catch' && <LetterCatch />}
             </div>
           </div>
         )}
