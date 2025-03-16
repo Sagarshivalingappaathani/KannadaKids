@@ -128,13 +128,5 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/13.mp3"
   },
-  {
-    id: "vowel-au4",
-    character: "ಔ",
-    name: "au",
-    pronunciation: "ou as in 'out'",
-    examples: ["ಔಷಧ (aushadha) - medicine", "ಔದಾರ್ಯ (audarya) - generosity"],
-    category: "vowel",
-    audio: "/audio/14.mp3"
-  }
+  
 ];

@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Progress } from '../components/ui/progress';
 import { motion } from 'framer-motion';
 import { Card } from '../components/ui/card';
+import { kannadaAlphabet } from "../lib/alphabetData";
 
 interface LetterLessonProps {
   letter: {
@@ -248,8 +249,8 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
 function LearnStep({ letter, setCurrentStep }: any) {
 
   const playAudio = () => {
-    console.log(letter.character)
-    const audio = new Audio(`/Audios/Kannada-audio-clips/${letter.name}.mp3`);
+    console.log(letter.audio)
+    const audio = new Audio(`${letter.audio}`);
     audio.play().catch(error => console.error("Error playing audio:", error));
   };
 
@@ -609,28 +610,44 @@ function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, 
   );
 }
 
-function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, loading }: any) {
+function QuizStep ({ letter, setCurrentStep, updateProgress, currentMastery, loading } : any)  {
+
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  
-  // Generate quiz options with the correct answer and 3 distractors
-  const generateOptions = () => {
-    // This would normally come from your database with real Kannada letters
-    const distractors = ["ಅ", "ಆ", "ಇ", "ಈ", "ಉ", "ಊ", "ಋ", "ೠ", "ಎ", "ಏ"]
-      .filter(char => char !== letter.character)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    
-    // Include the correct answer and shuffle
-    return [letter.name, ...distractors].sort(() => Math.random() - 0.5);
-  };
-  
-  const options = generateOptions();
+  const [options, setOptions] = useState<{ name: string; audio: string }[]>([]);
+  const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number | null>(null);
 
-  const handleAnswerSelect = (answer: string) => {
-    setSelectedAnswer(answer);
-    setIsCorrect(answer === letter.name);
+  useEffect(() => {
+    const generateOptions = () => {
+      const distractors = kannadaAlphabet
+        .filter(item => item.name !== letter.name)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
+  
+      const newOptions = [...distractors, letter].sort(() => Math.random() - 0.5);
+      setOptions(newOptions);
+  
+      // Find the correct answer index
+      const index = newOptions.findIndex(option => option.name === letter.name);
+      setCorrectAnswerIndex(index);
+      console.log("Correct Answer Index:", index);
+    };
+  
+    generateOptions();
+  }, [letter]);
+
+  // Function to play the corresponding audio file
+  const playAudio = (option: { name: string; audio: string }): void => {
+    const audio = new Audio(`${option.audio}`);
+    audio.play().catch(error => console.error("Error playing audio:", error));
+  };
+
+  const handleAnswerSelect = (answer: { name: string; audio: string }) => {
+    setSelectedAnswer(answer.name); 
+    setIsCorrect(answer.name === letter.name);
+    console.log("Selected Option", answer.name)
+    console.log((answer.name === letter.name))
   };
 
   const handleComplete = async () => {
@@ -639,7 +656,6 @@ function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, load
       await updateProgress(newMastery, false);
       setQuizCompleted(true);
     } else {
-      // If wrong answer, don't increase mastery but allow to continue
       setQuizCompleted(true);
     }
   };
@@ -661,7 +677,7 @@ function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, load
 
       <div className="py-6 space-y-6">
         <Card className="bg-gradient-to-r from-gray-50 to-indigo-50 p-6 border-none shadow-md">
-          <p className="font-medium mb-4 text-gray-700">Which letter is this?</p>
+          <p className="font-medium mb-4 text-gray-700">Identify Correct Pronounciation of letter ?</p>
           <motion.div 
             whileHover={{ scale: 1.05 }}
             className="w-32 h-32 mx-auto rounded-xl bg-white flex items-center justify-center text-5xl font-bold text-kid-purple mb-6 shadow-sm border border-gray-100"
@@ -669,29 +685,38 @@ function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, load
             {letter.character}
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4">
             {options.map((option, index) => (
-              <Button 
-                key={index}
-                variant={selectedAnswer === option ? 
-                  (option === letter.name ? "default" : "destructive") : 
-                  "outline"
-                }
-                className={`h-auto py-3 text-lg ${
-                  selectedAnswer === option && option === letter.name ? 
-                    "bg-green-600 hover:bg-green-700" : 
-                    selectedAnswer === option ? 
-                      "bg-red-600 hover:bg-red-700" : 
-                      "hover:bg-kid-purple/10 hover:text-kid-purple"
-                }`}
-                onClick={() => !quizCompleted && handleAnswerSelect(option)}
-                disabled={quizCompleted}
-              >
-                {option}
-                {selectedAnswer === option && option === letter.name && (
-                  <Check className="ml-2 h-4 w-4" />
-                )}
-              </Button>
+              <div key={index} className="flex items-center space-x-4">
+                {/* Circular Audio Button */}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full h-10 w-10 flex items-center justify-center bg-kid-purple/10 hover:bg-kid-purple/20"
+                  onClick={() => playAudio(option)}
+                >
+                  <Volume2 className="h-6 w-6 text-kid-purple" />
+                </Button>
+
+                {/* Selection Button */}
+                <Button 
+                  variant={selectedAnswer === option.name ? 
+                    (option.name === letter.name ? "default" : "destructive") : 
+                    "outline"
+                  }
+                  className={`flex-1 py-3 text-lg ${
+                    selectedAnswer === option.name 
+                      ? (option.name === letter.name 
+                          ? "bg-green-600 hover:bg-green-700"  // Correct answer → Green
+                          : "bg-red-600 hover:bg-red-700") // Incorrect answer → Red
+                      : "hover:bg-kid-purple/10 hover:text-kid-purple"
+                  }`}
+                  onClick={() => !quizCompleted && handleAnswerSelect(option)}
+                  disabled={quizCompleted}
+                >
+                  Option {index + 1}
+                </Button>
+              </div>
             ))}
           </div>
           
@@ -703,12 +728,14 @@ function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, load
                 isCorrect ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
               }`}
             >
-              {isCorrect ? 
-                "Correct! Well done!" : 
-                `Incorrect. The correct answer is "${letter.name}".`
-              }
+              {isCorrect 
+                ? "Correct! Well done!" 
+                : correctAnswerIndex !== null 
+                  ? `Incorrect. The correct answer is "Option ${correctAnswerIndex + 1}".`
+                  : "Incorrect. The correct answer is loading..."}
             </motion.div>
           )}
+
         </Card>
       </div>
 
@@ -749,7 +776,7 @@ function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, load
       </div>
     </div>
   );
-}
+};
 
 function CompleteStep({ letter, updateProgress, currentMastery, loading }: any) {
   const [confetti, setConfetti] = useState(false);
