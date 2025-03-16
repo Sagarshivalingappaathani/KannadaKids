@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Home, BookOpen, Play, Star, User, LogOut } from "lucide-react";
+import { Home, BookOpen, Play, Star, User, LogOut, Info } from "lucide-react";
 import { useAuth } from '@/lib/AuthContext';  // Import authentication hook
 
 const NavBar: React.FC = () => {
@@ -45,7 +45,7 @@ const NavBar: React.FC = () => {
           <a href="/dashboard" className="nav-link">Dashboard</a>
           <a href="/learn" className="nav-link">Learn</a>
           <a href="/play" className="nav-link">Play</a>
-          <a href="/" className="nav-link">About</a>
+          <a href="/about" className="nav-link">About</a>
         </nav>
 
         {/* User Authentication Status */}
@@ -83,6 +83,10 @@ const NavBar: React.FC = () => {
           <a href="/play" className="flex flex-col items-center text-kid-orange">
             <Star size={24} />
             <span className="text-xs mt-1">Play</span>
+          </a>
+          <a href="/about" className="flex flex-col items-center text-kid-purple">
+            <Info size={24} />
+            <span className="text-xs mt-1">About</span>
           </a>
         </nav>
       </div>
