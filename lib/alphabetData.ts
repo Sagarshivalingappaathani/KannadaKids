@@ -17,6 +17,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     examples: ["ಅಮ್ಮ (amma) - mother", "ಅಪ್ಪ (appa) - father"],
     category: "vowel"
   },
+  
   {
     id: "vowel-aa",
     character: "ಆ",
