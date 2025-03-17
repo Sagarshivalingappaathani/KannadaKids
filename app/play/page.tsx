@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from '@/components/NavBar'
 
 const PlayPage = () => {
-  const [selectedGame, setSelectedGame] = useState<string | null>('puzzle');
+  const [selectedGame, setSelectedGame] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 pt-24 pb-16 px-6">
@@ -30,7 +30,8 @@ const PlayPage = () => {
             Play these fun games to practice Kannada letters while having a great time!
           </p>
         </div>
-
+        
+        {!selectedGame && (
         <Tabs defaultValue="all" className="w-full max-w-4xl mx-auto">
           <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/50 backdrop-blur-md">
             <TabsTrigger value="all">All Games</TabsTrigger>
@@ -141,6 +142,7 @@ const PlayPage = () => {
             </div>
           </TabsContent>
         </Tabs>
+        )}
 
         {/* Game Display */}
         {selectedGame && (

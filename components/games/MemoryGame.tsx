@@ -239,13 +239,11 @@ const MemoryGame: React.FC = () => {
 
             {/* Card Back */}
             <div className={`
-              absolute inset-0 bg-gradient-to-br from-kid-purple/10 to-kid-blue/10
-              rounded-xl shadow border-2 border-white
+              absolute inset-0 rounded-xl bg-gradient-to-br from-kid-orange/20 to-kid-green/20
               flex items-center justify-center
-              transform backface-hidden rotate-y-180
+              transform backface-hidden
               ${card.flipped || card.matched ? 'opacity-0' : 'opacity-100'}
             `}>
-              <div className="text-4xl font-bold text-kid-purple/40">?</div>
             </div>
           </div>
         ))}
