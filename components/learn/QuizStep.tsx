@@ -189,7 +189,7 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
       <div className="flex justify-between">
         <Button 
           variant="outline" 
-          onClick={() => setCurrentStep(1)}
+          onClick={() => setCurrentStep(0)}
           className="border-kid-purple/30 text-kid-purple hover:bg-kid-purple/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />

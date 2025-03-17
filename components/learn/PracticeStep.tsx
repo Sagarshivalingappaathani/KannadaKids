@@ -278,7 +278,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
       <div className="flex justify-between">
         <Button 
           variant="outline" 
-          onClick={() => setCurrentStep(0)}
+          onClick={() => setCurrentStep(1)}
           className="border-kid-purple/30 text-kid-purple hover:bg-kid-purple/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
