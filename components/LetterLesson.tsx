@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/AuthContext';
@@ -12,6 +10,7 @@ import { motion } from 'framer-motion';
 import LearnStep from './learn/LearnStep';
 import PracticeStep from './learn/PracticeStep';
 import QuizStep from './learn/QuizStep';
+import TestStep from './learn/TestStep';
 import CompleteStep from './learn/CompleteStep';
 
 interface LetterLessonProps {
@@ -22,6 +21,7 @@ interface LetterLessonProps {
     pronunciation: string;
     examples: string[];
     audioUrl?: string;
+    rank: number;
   };
 }
 
@@ -38,11 +38,11 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     { title: "Learn", component: LearnStep },
     { title: "Quiz", component: QuizStep },
     { title: "Practice", component: PracticeStep },
+    { title: "Test", component: TestStep },
     { title: "Complete", component: CompleteStep },
   ];
 
   useEffect(() => {
-    // Fetch existing progress if user is logged in
     if (user) {
       const fetchProgress = async () => {
         setLoading(true);
@@ -72,11 +72,10 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
             setMastery(data.mastery_level);
             setCompleted(data.completed);
             
-            // If user has previously completed this letter, start at quiz step
             if (data.completed) {
-              setCurrentStep(0); // start from first
+              setCurrentStep(0);
             } else if (data.mastery_level > 0) {
-              setCurrentStep(data.mastery_level); // start from where u left
+              setCurrentStep(data.mastery_level);
             }
           }
         } catch (error) {
@@ -105,7 +104,6 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     try {
       const now = new Date().toISOString();
 
-      // Check if progress record exists
       const { data: existingData, error: fetchError } = await supabase
         .from('learning_progress')
         .select('*')
@@ -118,7 +116,6 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
       }
 
       if (existingData) {
-        // Update existing record
         const { error } = await supabase
           .from('learning_progress')
           .update({
@@ -130,7 +127,6 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
 
         if (error) throw error;
       } else {
-        // Insert new record
         const { error } = await supabase
           .from('learning_progress')
           .insert([
@@ -217,12 +213,13 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`h-2 flex-1 rounded-full ${index === currentStep
-                ? 'bg-kid-purple'
-                : index < currentStep
-                  ? 'bg-kid-purple/40'
-                  : 'bg-gray-200'
-                }`}
+              className={`h-2 flex-1 rounded-full ${
+                index === currentStep
+                  ? 'bg-kid-purple'
+                  : index < currentStep
+                    ? 'bg-kid-purple/40'
+                    : 'bg-gray-200'
+              }`}
             />
           ))}
         </div>

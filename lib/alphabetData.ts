@@ -1,6 +1,7 @@
 
 export type KannadaLetter = {
   id: string;
+  rank: number;     
   character: string;
   name: string;
   pronunciation: string;
@@ -15,6 +16,7 @@ export type KannadaLetter = {
 export const kannadaAlphabet: KannadaLetter[] = [
   {
     id: "vowel-a",
+    rank: 1,
     character: "ಅ",
     name: "a",
     pronunciation: "a as in 'america'",
@@ -28,6 +30,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   
   {
     id: "vowel-aa",
+    rank: 2,
     character: "ಆ",
     name: "aa",
     pronunciation: "aa as in 'art'",
@@ -40,6 +43,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-i",
+    rank: 3,
     character: "ಇ",
     name: "i",
     pronunciation: "i as in 'in'",
@@ -52,6 +56,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-ii",
+    rank: 4,
     character: "ಈ",
     name: "ii",
     pronunciation: "ee as in 'eat'",
@@ -64,6 +69,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-u",
+    rank: 5,
     character: "ಉ",
     name: "u",
     pronunciation: "u as in 'put'",
@@ -76,6 +82,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-uu",
+    rank: 6,
     character: "ಊ",
     name: "uu",
     pronunciation: "oo as in 'food'",
@@ -88,6 +95,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-ru",
+    rank: 7,
     character: "ಋ",
     name: "ru",
     pronunciation: "ru as in 'ruby'",
@@ -100,6 +108,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-e",
+    rank: 8,
     character: "ಎ",
     name: "e",
     pronunciation: "e as in 'egg'",
@@ -112,6 +121,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-ee",
+    rank: 9,
     character: "ಏ",
     name: "ee",
     pronunciation: "ay as in 'day'",
@@ -124,6 +134,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-ai",
+    rank: 10,
     character: "ಐ",
     name: "ai",
     pronunciation: "ai as in 'aisle'",
@@ -136,6 +147,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-o",
+    rank: 11,
     character: "ಒ",
     name: "o",
     pronunciation: "o as in 'hot'",
@@ -148,6 +160,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-oo",
+    rank: 12,
     character: "ಓ",
     name: "oo",
     pronunciation: "o as in 'over'",
@@ -160,6 +173,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-au",
+    rank: 13,
     character: "ಔ",
     name: "au",
     pronunciation: "ou as in 'out'",
@@ -173,6 +187,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   
   {
     id: "vowel-am",
+    rank: 14,
     character: "ಅಂ",
     name: "am",
     pronunciation: "am as in 'umbrella' (nasalized sound)",
@@ -185,6 +200,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
   },
   {
     id: "vowel-ahh",
+    rank: 15,
     character: "ಅಃ",
     name: "ahh",
     pronunciation: "ahh as in 'aha!' (breathy sound)",
