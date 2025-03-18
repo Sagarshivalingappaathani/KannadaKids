@@ -11,6 +11,7 @@ export type KannadaLetter = {
   word: string;
   image: string;
   transliteration: string;      
+  exampleImages : string[]
 };
 
 export const kannadaAlphabet: KannadaLetter[] = [
@@ -26,6 +27,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಅಪ್ಪ',
     image: '/images/words/1.jpg',
     transliteration: 'appa (father)',
+    exampleImages : ['/images/words/1.jpg', '/images/words/1.jpg']
   },
   
   {
@@ -40,6 +42,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಆನೆ',
     image: '/images/words/2.jpg',
     transliteration: 'aane (elephant)',
+    exampleImages : ['/images/words/2.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-i",
@@ -53,6 +56,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಇಲಿ',
     image: '/images/words/3.jpg',
     transliteration: 'ili (mouse)',
+    exampleImages : ['/images/words/3.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-ii",
@@ -66,6 +70,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಈಶ್ವರ',
     image: '/images/words/4.jpg',
     transliteration: 'eeshwar (god)',
+    exampleImages : ['/images/words/4.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-u",
@@ -79,6 +84,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಉಪ್ಪು',
     image: '/images/words/5.jpg',
     transliteration: 'uppu (soup)',
+    exampleImages : ['/images/words/5.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-uu",
@@ -92,6 +98,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಊಟ',
     image: '/images/words/6.jpg',
     transliteration: 'oot (food)',
+    exampleImages : ['/images/words/6.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-ru",
@@ -105,6 +112,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಋಷಿ',
     image: '/images/words/7.jpg',
     transliteration: 'rishi (teacher)',
+    exampleImages : ['/images/words/7.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-e",
@@ -118,6 +126,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಎಲೆ',
     image: '/images/words/8.jpg',
     transliteration: 'ele (leaf)',
+    exampleImages : ['/images/words/8.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-ee",
@@ -131,6 +140,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಏಣಿ',
     image: '/images/words/9.jpg',
     transliteration: 'ene (river)',
+    exampleImages : ['/images/words/9.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-ai",
@@ -144,6 +154,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಐದು',
     image: '/images/words/10.jpg',
     transliteration: 'aidu (five)',
+    exampleImages : ['/images/words/10.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-o",
@@ -157,6 +168,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಒಂದು',
     image: '/images/words/11.jpg',
     transliteration: 'oondu (one)',
+    exampleImages : ['/images/words/11.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-oo",
@@ -170,6 +182,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಓದು',
     image: '/images/words/12.jpg',
     transliteration: 'oodu (read)',
+    exampleImages : ['/images/words/12.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-au",
@@ -183,6 +196,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಔಷಧ',
     image: '/images/words/13.jpg',
     transliteration: 'aushadha (medicine)',
+    exampleImages : ['/images/words/13.jpg', '/images/words/1.jpg']
   },
   
   {
@@ -197,6 +211,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಹಂಸ',
     image: '/images/words/14.jpg',
     transliteration: 'hans (horse)',
+    exampleImages : ['/images/words/14.jpg', '/images/words/1.jpg']
   },
   {
     id: "vowel-ahh",
@@ -210,5 +225,6 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ನಮಃ',
     image: '/images/words/15.jpg',
     transliteration: 'namah (salutation)',
+    exampleImages : ['/images/words/15.jpg', '/images/words/1.jpg']
   }
 ];
