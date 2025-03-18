@@ -12,14 +12,23 @@ interface ExampleStepProps {
     examples: string[];
     audio?: string;
   };
+  currentMastery: number;
   setCurrentStep: (step: number) => void;
+  updateProgress: (mastery: number, completed: boolean) => Promise<void>;
 }
 
-export default function ExampleStep({ letter, setCurrentStep }: ExampleStepProps) {
+export default function ExampleStep({ letter, setCurrentStep, updateProgress, currentMastery }: ExampleStepProps) {
+  
+    const handleComplete = async () => {
+        const newMastery = currentMastery + 1;
+        console.log("Your new mastery is : ", newMastery)
+        await updateProgress(newMastery, true);
+        setCurrentStep(5)
+    };
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Let's Learn <span className="text-kid-purple">"{letter.name}"</span></h2>
+      <h2 className="text-2xl font-bold text-gray-800">Few Words Examples for letter <span className="text-kid-purple">"{letter.character}"</span></h2>
 
       <div className="flex flex-col items-center py-8">
         
@@ -52,7 +61,7 @@ export default function ExampleStep({ letter, setCurrentStep }: ExampleStepProps
 
       <div className="flex justify-end">
         <Button 
-          onClick={() => setCurrentStep(5)} 
+          onClick={handleComplete} 
           className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2 px-5 py-6 text-base"
         >
           Finish Learning

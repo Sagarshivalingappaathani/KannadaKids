@@ -143,13 +143,13 @@ export default function CompleteStep({ letter, updateProgress, currentMastery, l
           </Button>
         </Link>
 
-        <Button 
+        {/* <Button 
           onClick={handleComplete} 
           disabled={loading} 
           className="bg-gradient-to-r from-kid-purple to-kid-blue hover:opacity-90 px-5 py-6 text-base shadow-md"
         >
-          {loading ? "Saving..." : "Complete & Continue"}
-        </Button>
+          {loading ? "Saving..." : "Start Again"}
+        </Button> */}
       </motion.div>
     </div>
   );

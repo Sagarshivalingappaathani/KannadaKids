@@ -73,12 +73,12 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
             setProgress(data);
             setMastery(data.mastery_level);
             setCompleted(data.completed);
-            
-            if (data.completed) {
-              setCurrentStep(0);
-            } else if (data.mastery_level > 0) {
-              setCurrentStep(data.mastery_level);
-            }
+            setCurrentStep(0)
+            // if (data.completed) {
+            //   setCurrentStep(0);
+            // } else if (data.mastery_level > 0) {
+            //   setCurrentStep(data.mastery_level);
+            // }
           }
         } catch (error) {
           console.error('Error fetching progress:', error);

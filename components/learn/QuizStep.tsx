@@ -113,7 +113,8 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
 
   const handleComplete = async () => {
     if (isCorrect) {
-      const newMastery = Math.min(currentMastery + 1, 3);
+      console.log("Current steps is :", currentMastery);
+      const newMastery = currentMastery + 1;
       await updateProgress(newMastery, false);
       setQuizCompleted(true);
     } else {
