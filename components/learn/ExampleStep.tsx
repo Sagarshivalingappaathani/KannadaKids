@@ -13,9 +13,19 @@ interface ExampleStepProps {
     audio?: string;
   };
   setCurrentStep: (step: number) => void;
+  updateProgress: (mastery: number, completed: boolean) => Promise<void>;
+  currentMastery: number;
+  completed: boolean;
 }
 
-export default function ExampleStep({ letter, setCurrentStep }: ExampleStepProps) {
+export default function ExampleStep({ letter, setCurrentStep, updateProgress, currentMastery, completed }: ExampleStepProps) {
+
+  const handleContinue = async () => {
+    if (!completed) {
+      await updateProgress(currentMastery+1, true);
+    }
+    setCurrentStep(5);
+  };  
 
   return (
     <div className="space-y-6">
@@ -52,7 +62,7 @@ export default function ExampleStep({ letter, setCurrentStep }: ExampleStepProps
 
       <div className="flex justify-end">
         <Button 
-          onClick={() => setCurrentStep(5)} 
+          onClick={() => handleContinue()} 
           className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2 px-5 py-6 text-base"
         >
           Finish Learning

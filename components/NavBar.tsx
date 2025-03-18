@@ -7,7 +7,6 @@ import { useAuth } from '@/lib/AuthContext';  // Import authentication hook
 const NavBar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const { user, signOut } = useAuth(); // Get user and signOut function
-  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {

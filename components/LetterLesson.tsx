@@ -68,7 +68,7 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           if (error && error.code !== 'PGRST116') {
             throw error;
           }
-
+          
           if (data) {
             setProgress(data);
             setMastery(data.mastery_level);
@@ -102,7 +102,7 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     }
 
     setLoading(true);
-
+    console.log("updateProgress",newMastery, isCompleted);
     try {
       const now = new Date().toISOString();
 
@@ -240,6 +240,7 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           updateProgress={updateProgress}
           currentMastery={mastery}
           setCurrentStep={setCurrentStep}
+          completed={completed}
           loading={loading}
         />
       </motion.div>

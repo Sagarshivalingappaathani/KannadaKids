@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Check, Volume2, Play, Square } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Card } from '../../components/ui/card';
-import { kannadaAlphabet } from "../../lib/alphabetData";
+import { Card } from '@/components/ui/card';
+import { kannadaAlphabet } from "@/lib/alphabetData";
 import confetti from 'canvas-confetti';
 
 interface QuizStepProps {
@@ -19,9 +19,10 @@ interface QuizStepProps {
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
   currentMastery: number;
   loading: boolean;
+  completed: boolean;
 }
 
-export default function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, loading }: QuizStepProps) {
+export default function QuizStep({ letter, setCurrentStep, updateProgress, currentMastery, loading, completed }: QuizStepProps) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -112,9 +113,8 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
   };
 
   const handleComplete = async () => {
-    if (isCorrect) {
-      const newMastery = Math.min(currentMastery + 1, 3);
-      await updateProgress(newMastery, false);
+    if (isCorrect && !completed) {
+      await updateProgress(currentMastery+1, false);
       setQuizCompleted(true);
     } else {
       setQuizCompleted(true);

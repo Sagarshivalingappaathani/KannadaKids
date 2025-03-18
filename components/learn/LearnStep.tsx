@@ -13,13 +13,22 @@ interface LearnStepProps {
     audio?: string;
   };
   setCurrentStep: (step: number) => void;
+  updateProgress: (mastery: number, completed: boolean) => Promise<void>;
+  completed: boolean;
 }
 
-export default function LearnStep({ letter, setCurrentStep }: LearnStepProps) {
+export default function LearnStep({ letter, setCurrentStep, updateProgress, completed }: LearnStepProps) {
   const playAudio = () => {
     console.log(letter.audio);
     const audio = new Audio(`${letter.audio}`);
     audio.play().catch(error => console.error("Error playing audio:", error));
+  };
+
+  const handleContinue = async () => {
+    if (!completed) {
+      await updateProgress(1, false);
+    }
+    setCurrentStep(1);
   };
 
   return (
@@ -55,7 +64,7 @@ export default function LearnStep({ letter, setCurrentStep }: LearnStepProps) {
 
       <div className="flex justify-end">
         <Button 
-          onClick={() => setCurrentStep(1)} 
+          onClick={() => handleContinue()} 
           className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2 px-5 py-6 text-base"
         >
           Continue to Learn

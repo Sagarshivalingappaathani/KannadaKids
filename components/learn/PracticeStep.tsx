@@ -14,11 +14,12 @@ interface PracticeStepProps {
   };
   setCurrentStep: (step: number) => void;
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
-  currentMastery: number;
+  currentMastery: number;   
   loading: boolean;
+  completed: boolean;
 }
 
-export default function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, loading }: PracticeStepProps) {
+export default function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, loading, completed }: PracticeStepProps) {
   const [practiced, setPracticed] = useState(false);
   const [correctTrace, setCorrectTrace] = useState(true);
   const [canvasKey, setCanvasKey] = useState(0);
@@ -220,8 +221,10 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   }, [letter.character, canvasKey, penSize, penColor, guideOpacity]);
 
   const handleComplete = async () => {
-    const newMastery = currentMastery + 1;
-    await updateProgress(newMastery, false);
+    if (!completed) {
+      const newMastery = currentMastery + 1;
+      await updateProgress(newMastery, false);
+    }
     setPracticed(true);
   };
 
@@ -312,22 +315,12 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
             </div>
           </div>
         </div>
-        
-        {/* Animation tips */}
-        <div className="bg-kid-purple/5 border border-kid-purple/20 p-4 rounded-lg w-full max-w-md">
-          <h3 className="text-kid-purple font-medium mb-2">Tips for Writing Kannada:</h3>
-          <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
-            <li>Start from the top and work your way down</li>
-            <li>Practice the curves and loops carefully</li>
-            <li>Try to maintain consistent proportions</li>
-          </ul>
-        </div>
       </div>
 
       <div className="flex justify-between">
         <Button 
           variant="outline" 
-          onClick={() => setCurrentStep(0)}
+          onClick={() => setCurrentStep(1)}
           className="border-kid-purple/30 text-kid-purple hover:bg-kid-purple/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
