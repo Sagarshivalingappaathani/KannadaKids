@@ -28,6 +28,7 @@ export default function CompleteStep({ letter, updateProgress, currentMastery, l
   }, []);
 
   const handleComplete = async () => {
+    console.log("Your currentMastery", currentMastery)
     const newMastery = Math.min(currentMastery + 2, 5);
     await updateProgress(newMastery, true);
   };
