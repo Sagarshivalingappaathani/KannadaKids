@@ -339,7 +339,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
             onClick={() => setCurrentStep(3)} 
             className="bg-gradient-to-r from-kid-purple to-kid-purple/90 hover:opacity-90 text-white shadow-md flex items-center gap-2 px-6"
           >
-            Continue to Quiz
+            Continue to Learn
             <ArrowRight className="h-4 w-4" />
           </Button>
         ) : (

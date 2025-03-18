@@ -50,28 +50,6 @@ export default function LearnStep({ letter, setCurrentStep }: LearnStepProps) {
           </div>
           <p className="text-gray-600 mb-6">Listen and repeat the sound of this letter.</p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-gradient-to-r from-gray-50 to-indigo-50 p-6 rounded-lg mb-6 shadow-sm"
-          >
-            <h3 className="font-bold mb-3 text-gray-700">Example Words:</h3>
-            <ul className="space-y-3">
-              {letter.examples.map((example: string, index: number) => (
-                <motion.li 
-                  key={index} 
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 + index * 0.2 }}
-                  className="text-gray-700 bg-white p-3 rounded-md shadow-sm flex items-center"
-                >
-                  <span className="mr-3 text-kid-purple">•</span>
-                  {example}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
         </div>
       </div>
 
@@ -80,7 +58,7 @@ export default function LearnStep({ letter, setCurrentStep }: LearnStepProps) {
           onClick={() => setCurrentStep(1)} 
           className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2 px-5 py-6 text-base"
         >
-          Continue to Practice
+          Continue to Learn
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>
