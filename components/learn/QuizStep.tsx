@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Check, Volume2, Play, Square } from 'lucide-reac
 import { motion } from 'framer-motion';
 import { Card } from '../../components/ui/card';
 import { kannadaAlphabet } from "../../lib/alphabetData";
+import confetti from 'canvas-confetti';
 
 interface QuizStepProps {
   letter: {
@@ -28,32 +29,32 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
   const [options, setOptions] = useState<{ name: string; audio: string }[]>([]);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
 
-    useEffect(() => {
-        const generateOptions = () => {
-            const distractors = kannadaAlphabet
-            .filter(item => item.name !== letter.name)
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 3)
-            .map(item => ({
-                name: item.name,
-                audio: item.audio || ''
-            }));
+  useEffect(() => {
+    const generateOptions = () => {
+      const distractors = kannadaAlphabet
+        .filter(item => item.name !== letter.name)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map(item => ({
+          name: item.name,
+          audio: item.audio || ''
+        }));
 
-            const correctOption = {
-            name: letter.name,
-            audio: letter.audio || ''
-            };
+      const correctOption = {
+        name: letter.name,
+        audio: letter.audio || ''
+      };
 
-            const newOptions = [...distractors, correctOption].sort(() => Math.random() - 0.5);
-            setOptions(newOptions);
+      const newOptions = [...distractors, correctOption].sort(() => Math.random() - 0.5);
+      setOptions(newOptions);
 
-            // Find the correct answer index
-            const index = newOptions.findIndex(option => option.name === letter.name);
-            setCorrectAnswerIndex(index);
-            };
+      // Find the correct answer index
+      const index = newOptions.findIndex(option => option.name === letter.name);
+      setCorrectAnswerIndex(index);
+    };
 
-        generateOptions();
-    }, [letter]);
+    generateOptions();
+  }, [letter]);
 
   // Function to play the corresponding audio file
   const playAudio = (option: { name: string; audio: string }): void => {
@@ -73,12 +74,12 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
         audioElements[i].pause();
         audioElements[i].currentTime = 0;
       }
-      
+
       // Play the new audio
       setPlayingAudio(option.name);
       const audio = new Audio(`${option.audio}`);
       audio.play().catch(error => console.error("Error playing audio:", error));
-      
+
       // When audio ends, reset the playing state
       audio.onended = () => {
         setPlayingAudio(null);
@@ -87,10 +88,27 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
   };
 
   const handleAnswerSelect = (answer: { name: string; audio: string }) => {
-    setSelectedAnswer(answer.name); 
+    setSelectedAnswer(answer.name);
     setIsCorrect(answer.name === letter.name);
-    console.log("Selected Option", answer.name);
-    console.log((answer.name === letter.name));
+    if (answer.name === letter.name) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: {
+          y: 0.7
+        }
+      });
+
+      const successSound = new Audio('/audio/success.mp3');
+      successSound.play().catch(error => {
+        console.error("Success sound playback failed:", error);
+      });
+    } else {
+      const failureSound = new Audio('/audio/error.mp3');
+      failureSound.play().catch(error => {
+        console.error("Failure sound playback failed:", error);
+      });
+    }
   };
 
   const handleComplete = async () => {
@@ -108,7 +126,7 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
       <h2 className="text-2xl font-bold flex items-center">
         <span>Test Your Knowledge</span>
         {quizCompleted && isCorrect && (
-          <motion.div 
+          <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="ml-3 bg-green-100 p-1 rounded-full"
@@ -121,7 +139,7 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
       <div className="py-6 space-y-6">
         <Card className="bg-gradient-to-r from-gray-50 to-indigo-50 p-6 border-none shadow-md">
           <p className="font-medium mb-4 text-gray-700">Identify Correct Pronounciation of letter {letter.character}?</p>
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.05 }}
             className="w-32 h-32 mx-auto rounded-xl bg-white flex items-center justify-center text-5xl font-bold text-kid-purple mb-6 shadow-sm border border-gray-100"
           >
@@ -129,55 +147,53 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
           </motion.div>
 
           <div className="grid grid-cols-2 gap-4">
-  {options.map((option, index) => (
-    <div key={index} className="flex items-center space-x-2">
-      {/* Audio Button */}
-      <Button
-        variant="outline"
-        size="icon"
-        className="rounded-full h-10 w-10 flex items-center justify-center bg-kid-purple/10 hover:bg-kid-purple/20"
-        onClick={() => playAudio(option)}
-      >
-        {playingAudio === option.name ? (
-          <Square className="h-5 w-5 text-kid-purple" />
-        ) : (
-          <Play className="h-5 w-5 text-kid-purple ml-0.5" /> // Added slight margin for visual centering
-        )}
-      </Button>
+            {options.map((option, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                {/* Audio Button */}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full h-10 w-10 flex items-center justify-center bg-kid-purple/10 hover:bg-kid-purple/20"
+                  onClick={() => playAudio(option)}
+                >
+                  {playingAudio === option.name ? (
+                    <Square className="h-5 w-5 text-kid-purple" />
+                  ) : (
+                    <Play className="h-5 w-5 text-kid-purple ml-0.5" /> // Added slight margin for visual centering
+                  )}
+                </Button>
 
-      {/* Selection Button */}
-      <Button 
-        variant={selectedAnswer === option.name ? 
-          (option.name === letter.name ? "default" : "destructive") : 
-          "outline"
-        }
-        className={`flex-1 py-3 text-lg ${
-          selectedAnswer === option.name 
-            ? (option.name === letter.name 
-                ? "bg-green-600 hover:bg-green-700"  
-                : "bg-red-600 hover:bg-red-700") 
-            : "hover:bg-kid-purple/10 hover:text-kid-purple"
-        }`}
-        onClick={() => !quizCompleted && handleAnswerSelect(option)}
-        disabled={quizCompleted}
-      >
-        Option {index + 1}
-      </Button>
-    </div>
-  ))}
-</div>
-          
+                {/* Selection Button */}
+                <Button
+                  variant={selectedAnswer === option.name ?
+                    (option.name === letter.name ? "default" : "destructive") :
+                    "outline"
+                  }
+                  className={`flex-1 py-3 text-lg ${selectedAnswer === option.name
+                      ? (option.name === letter.name
+                        ? "bg-green-600 hover:bg-green-700"
+                        : "bg-red-600 hover:bg-red-700")
+                      : "hover:bg-kid-purple/10 hover:text-kid-purple"
+                    }`}
+                  onClick={() => !quizCompleted && handleAnswerSelect(option)}
+                  disabled={quizCompleted}
+                >
+                  Option {index + 1}
+                </Button>
+              </div>
+            ))}
+          </div>
+
           {selectedAnswer && !quizCompleted && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`mt-4 p-3 rounded-md ${
-                isCorrect ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-              }`}
+              className={`mt-4 p-3 rounded-md ${isCorrect ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                }`}
             >
-              {isCorrect 
-                ? "Correct! Well done!" 
-                : correctAnswerIndex !== null 
+              {isCorrect
+                ? "Correct! Well done!"
+                : correctAnswerIndex !== null
                   ? `Incorrect. The correct answer is "Option ${correctAnswerIndex + 1}".`
                   : "Incorrect. The correct answer is loading..."}
             </motion.div>
@@ -187,8 +203,8 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
       </div>
 
       <div className="flex justify-between">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={() => setCurrentStep(0)}
           className="border-kid-purple/30 text-kid-purple hover:bg-kid-purple/10"
         >
@@ -198,17 +214,17 @@ export default function QuizStep({ letter, setCurrentStep, updateProgress, curre
 
         {selectedAnswer ? (
           quizCompleted ? (
-            <Button 
-              onClick={() => setCurrentStep(2)} 
+            <Button
+              onClick={() => setCurrentStep(2)}
               className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2"
             >
               Continue to Learn
               <ArrowRight className="h-4 w-4" />
             </Button>
           ) : (
-            <Button 
-              onClick={handleComplete} 
-              disabled={loading} 
+            <Button
+              onClick={handleComplete}
+              disabled={loading}
               className="bg-kid-blue hover:bg-kid-blue/90 flex items-center gap-2"
             >
               {loading ? "Saving..." : "Submit Answer"}
