@@ -46,7 +46,7 @@ const PlayPage = () => {
                 title="Letter Puzzle"
                 description="Drag and drop puzzle pieces to form Kannada letters"
                 color="from-kid-purple/20 to-kid-blue/20"
-                icon="🧩"
+                icon="🎲"
                 onClick={() => setSelectedGame('puzzle')}
               />
               
@@ -83,7 +83,7 @@ const PlayPage = () => {
                 title="Letter Catch"
                 description="Catch the falling Kannada letters"
                 color="from-kid-purple/20 to-kid-blue/20"
-                icon="🎮"
+                icon="⚡"
                 onClick={() => setSelectedGame('letter-catch')}
               />
             </div>
@@ -121,7 +121,7 @@ const PlayPage = () => {
                 title="Letter Puzzle"
                 description="Drag and drop puzzle pieces to form Kannada letters"
                 color="from-kid-purple/20 to-kid-blue/20"
-                icon="🧩"
+                icon="🎲"
                 onClick={() => setSelectedGame('puzzle')}
               />
               
@@ -136,7 +136,7 @@ const PlayPage = () => {
                 title="Letter Catch"
                 description="Catch the falling Kannada letters"
                 color="from-kid-purple/20 to-kid-blue/20"
-                icon="🎮"
+                icon="⚡"
                 onClick={() => setSelectedGame('letter-catch')}
               />
             </div>
