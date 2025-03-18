@@ -11,6 +11,7 @@ import LearnStep from './learn/LearnStep';
 import PracticeStep from './learn/PracticeStep';
 import QuizStep from './learn/QuizStep';
 import TestStep from './learn/TestStep';
+import ExampleStep from './learn/ExampleStep';
 import CompleteStep from './learn/CompleteStep';
 
 interface LetterLessonProps {
@@ -39,6 +40,7 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     { title: "Quiz", component: QuizStep },
     { title: "Practice", component: PracticeStep },
     { title: "Test", component: TestStep },
+    { title: "ExampleStep", component: ExampleStep },
     { title: "Complete", component: CompleteStep },
   ];
 
