@@ -15,16 +15,17 @@ interface ExampleStepProps {
   currentMastery: number;
   setCurrentStep: (step: number) => void;
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
+  completed: boolean;
 }
 
-export default function ExampleStep({ letter, setCurrentStep, updateProgress, currentMastery }: ExampleStepProps) {
-  
-    const handleComplete = async () => {
-        const newMastery = currentMastery + 1;
-        console.log("Your new mastery is : ", newMastery)
-        await updateProgress(newMastery, true);
-        setCurrentStep(5)
-    };
+export default function ExampleStep({ letter, setCurrentStep, updateProgress, currentMastery, completed }: ExampleStepProps) {
+
+  const handleContinue = async () => {
+    if (!completed) {
+      await updateProgress(currentMastery+1, true);
+    }
+    setCurrentStep(5);
+  };  
 
   return (
     <div className="space-y-6">
@@ -61,7 +62,7 @@ export default function ExampleStep({ letter, setCurrentStep, updateProgress, cu
 
       <div className="flex justify-end">
         <Button 
-          onClick={handleComplete} 
+          onClick={() => handleContinue()} 
           className="bg-kid-purple hover:bg-kid-purple/90 flex items-center gap-2 px-5 py-6 text-base"
         >
           Finish Learning

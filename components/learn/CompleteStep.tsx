@@ -24,14 +24,12 @@ export default function CompleteStep({ letter, updateProgress, currentMastery, l
   useEffect(() => {
     setConfetti(true);
     const timer = setTimeout(() => setConfetti(false), 3000);
+    //add completed audio
+    const audio = new Audio('/audio/completion.mp3');
+    audio.play();
     return () => clearTimeout(timer);
   }, []);
 
-  const handleComplete = async () => {
-    console.log("Your currentMastery", currentMastery)
-    const newMastery = Math.min(currentMastery + 2, 5);
-    await updateProgress(newMastery, true);
-  };
 
   return (
     <div className="text-center py-8 space-y-6">
@@ -142,14 +140,6 @@ export default function CompleteStep({ letter, updateProgress, currentMastery, l
             Back to All Letters
           </Button>
         </Link>
-
-        {/* <Button 
-          onClick={handleComplete} 
-          disabled={loading} 
-          className="bg-gradient-to-r from-kid-purple to-kid-blue hover:opacity-90 px-5 py-6 text-base shadow-md"
-        >
-          {loading ? "Saving..." : "Start Again"}
-        </Button> */}
       </motion.div>
     </div>
   );
