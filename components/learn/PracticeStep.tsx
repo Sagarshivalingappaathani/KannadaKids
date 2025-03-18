@@ -25,6 +25,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   const [penSize, setPenSize] = useState(6);
   const [penColor, setPenColor] = useState('#7c3aed'); // kid-purple color
   const [guideOpacity, setGuideOpacity] = useState(0.1);
+  const [letterPixels, setLetterPixels] = useState<boolean[][]>([]);
   
   useEffect(() => {
     const canvas = document.getElementById('practiceCanvas') as HTMLCanvasElement;
@@ -53,6 +54,48 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
     ctx.textBaseline = 'middle';
     ctx.fillText(letter.character, canvas.width / 2, canvas.height / 2);
 
+    // Create a 2D array to track which pixels are part of the letter
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const pixelMap: boolean[][] = Array(canvas.height).fill(null).map(() => Array(canvas.width).fill(false));
+    
+    // Any non-white pixel (not pure 255,255,255) is considered part of the letter
+    for (let y = 0; y < canvas.height; y++) {
+      for (let x = 0; x < canvas.width; x++) {
+        const index = (y * canvas.width + x) * 4;
+        // If pixel is not pure white, mark as letter pixel
+        if (imageData.data[index] < 255 || 
+            imageData.data[index + 1] < 255 || 
+            imageData.data[index + 2] < 255) {
+          pixelMap[y][x] = true;
+        }
+      }
+    }
+    
+    setLetterPixels(pixelMap);
+
+    // Check if a point is inside the letter boundaries with tolerance
+    function isInsideLetter(x: number, y: number): boolean {
+      // Add some tolerance for better user experience
+      const tolerance = Math.max(6, penSize);
+      
+      // Check in a small square area around the point
+      for (let offsetY = -tolerance; offsetY <= tolerance; offsetY++) {
+        for (let offsetX = -tolerance; offsetX <= tolerance; offsetX++) {
+          const checkY = Math.floor(y + offsetY);
+          const checkX = Math.floor(x + offsetX);
+          
+          // Ensure we're within canvas bounds
+          if (checkY >= 0 && checkY < canvas.height && 
+              checkX >= 0 && checkX < canvas.width) {
+            if (pixelMap[checkY][checkX]) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+
     // Drawing functions
     function startDrawing(e: MouseEvent | TouchEvent) {
       isDrawing = true;
@@ -64,7 +107,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
       if (ctx) {
         ctx.beginPath();
         ctx.arc(lastX, lastY, penSize / 2, 0, Math.PI * 2);
-        ctx.fillStyle = penColor;
+        ctx.fillStyle = isInsideLetter(lastX, lastY) ? penColor : 'red';
         ctx.fill();
       }
     }
@@ -82,7 +125,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(x, y);
-        ctx.strokeStyle = penColor;
+        ctx.strokeStyle = isInsideLetter(x, y) ? penColor : 'red';
         ctx.lineWidth = penSize;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
@@ -278,19 +321,19 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
       <div className="flex justify-between">
         <Button 
           variant="outline" 
-          onClick={() => setCurrentStep(1)}
+          onClick={() => setCurrentStep(0)}
           className="border-kid-purple/30 text-kid-purple hover:bg-kid-purple/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Test
+          Back to Learn
         </Button>
 
         {practiced ? (
           <Button 
-            onClick={() => setCurrentStep(3)} 
+            onClick={() => setCurrentStep(2)} 
             className="bg-gradient-to-r from-kid-purple to-kid-purple/90 hover:opacity-90 text-white shadow-md flex items-center gap-2 px-6"
           >
-            Complete Lesson
+            Continue to Quiz
             <ArrowRight className="h-4 w-4" />
           </Button>
         ) : (
