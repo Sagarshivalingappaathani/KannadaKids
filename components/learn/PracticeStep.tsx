@@ -20,6 +20,7 @@ interface PracticeStepProps {
 
 export default function PracticeStep({ letter, setCurrentStep, updateProgress, currentMastery, loading }: PracticeStepProps) {
   const [practiced, setPracticed] = useState(false);
+  const [correctTrace, setCorrectTrace] = useState(true);
   const [canvasKey, setCanvasKey] = useState(0);
   const [drawingData, setDrawingData] = useState<any>(null);
   const [penSize, setPenSize] = useState(6);
@@ -93,6 +94,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
           }
         }
       }
+      setCorrectTrace(false);
       return false;
     }
 
@@ -218,12 +220,13 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   }, [letter.character, canvasKey, penSize, penColor, guideOpacity]);
 
   const handleComplete = async () => {
-    const newMastery = Math.min(currentMastery + 1, 2);
+    const newMastery = currentMastery + 1;
     await updateProgress(newMastery, false);
     setPracticed(true);
   };
 
   const resetCanvas = () => {
+    setCorrectTrace(true)
     setCanvasKey(prev => prev + 1);
   };
 
@@ -233,10 +236,13 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   };
 
   return (
+
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Practice Writing <span className="text-kid-purple">"{letter.name}"</span></h2>
+      {correctTrace ? <p className="text-center text-green-500">Key Note 📝 : Trace correctly on the letter</p> 
+      : <p className="text-center text-red-500">Error ⚠️😊 : Please trace on the letter</p> }
 
-      <div className="flex flex-col items-center py-4">
+      <div className="flex flex-col items-center py-2">
         <div className="w-full max-w-md mx-auto bg-gradient-to-r from-gray-50 to-indigo-50 rounded-lg p-6 mb-6 shadow-md">
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center gap-2">
@@ -330,7 +336,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
 
         {practiced ? (
           <Button 
-            onClick={() => setCurrentStep(2)} 
+            onClick={() => setCurrentStep(3)} 
             className="bg-gradient-to-r from-kid-purple to-kid-purple/90 hover:opacity-90 text-white shadow-md flex items-center gap-2 px-6"
           >
             Continue to Quiz
