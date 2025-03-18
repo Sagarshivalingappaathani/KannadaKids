@@ -158,7 +158,7 @@ export default function TestStep({
 
       // Check if user has completed enough successful attempts
       if (successfulAttempts >= 2) {
-        updateProgress(currentMastery + 1, true);
+        updateProgress(currentMastery + 1, false);
         setTimeout(() => setCurrentStep(4), 1500); // Move to Complete step
       }
     } catch (error) {
