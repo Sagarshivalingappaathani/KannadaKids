@@ -55,6 +55,8 @@ const KannadaJigsawGame: React.FC = () => {
                         word: 'ಅಪ್ಪ',
                         image: '/images/words/1.jpg',
                         transliteration: 'appa (father)',
+                        rank: 1,
+                        exampleImages: ['/images/examples/1.jpg', '/images/examples/2.jpg']
                     },
                     {
                         id: "vowel-aa",
@@ -67,7 +69,9 @@ const KannadaJigsawGame: React.FC = () => {
                         word: 'ಆನೆ',
                         image: '/images/words/2.jpg',
                         transliteration: 'aane (elephant)',
-                    },
+                        rank: 2,
+                        exampleImages: ['/images/examples/3.jpg', '/images/examples/4.jpg'],
+                    }
                     // More letters would be here in the actual implementation
                 ];
 

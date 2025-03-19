@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, ArrowRight, Check, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 interface PracticeStepProps {
   letter: {
@@ -226,6 +227,16 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
       await updateProgress(newMastery, false);
     }
     setPracticed(true);
+    // Play success sound
+    const successSound = new Audio('/audio/success.mp3');
+    successSound.play().catch(error => {
+      console.error("Success sound playback failed:", error);
+    });
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
   };
 
   const resetCanvas = () => {

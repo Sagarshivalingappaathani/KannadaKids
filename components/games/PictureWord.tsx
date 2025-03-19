@@ -177,6 +177,12 @@ const PictureWordAssociation: React.FC = () => {
           spread: 70,
           origin: { y: 0.6 }
         });
+
+        // Play completion sound
+        const completionSound = new Audio('/audio/completion.mp3');
+        completionSound.play().catch(error => {
+            console.error("Completion sound playback failed:", error);
+        });
       } else {
         // Otherwise, move to next question after a small delay
         setTimeout(() => {

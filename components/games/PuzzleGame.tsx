@@ -180,6 +180,11 @@ const AlphabetOrderingGame: React.FC = () => {
             description: `Congratulations! You've mastered the Kannada alphabet with a score of ${score + pointsEarned}!`,
             duration: 5000,
           });
+          // Play completion sound
+          const completionSound = new Audio('/audio/completion.mp3');
+          completionSound.play().catch(error => {
+              console.error("Completion sound playback failed:", error);
+          });
         } else if (difficulty === 'hard' && categoryFilter === 'vowel') {
           // Move to consonants
           setCategoryFilter('consonant');

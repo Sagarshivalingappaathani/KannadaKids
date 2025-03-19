@@ -196,6 +196,12 @@ const KannadaMatchGame: React.FC = () => {
                             spread: 70,
                             origin: { y: 0.6 }
                         });
+
+                        // Play completion sound
+                        const completionSound = new Audio('/audio/completion.mp3');
+                        completionSound.play().catch(error => {
+                            console.error("Completion sound playback failed:", error);
+                        });
                     }
                 } else {
                     // Play error sound
@@ -310,7 +316,7 @@ const KannadaMatchGame: React.FC = () => {
                                         <span className={`text-2xl font-baloo ${prompt.matched ? 'text-green-600' : 'text-gray-800'}`}>
                                             {prompt.displayValue}
                                         </span>
-                                        
+
                                     </div>
                                 </div>
                             ))}

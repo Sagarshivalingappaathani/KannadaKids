@@ -128,6 +128,10 @@ const MemoryGame: React.FC = () => {
         setMatches(newMatchCount);
         setCards(matchedCards);
         setFlippedCards([]);
+        const successSound = new Audio('/audio/success.mp3');
+          successSound.play().catch(error => {
+            console.error("Success sound playback failed:", error);
+          });
 
         // Check if game is complete
         const totalPairs = matchedCards.length / 2;
@@ -140,9 +144,9 @@ const MemoryGame: React.FC = () => {
             origin: { y: 0.6 }
           });
 
-          const successSound = new Audio('/audio/success.mp3');
-          successSound.play().catch(error => {
-            console.error("Success sound playback failed:", error);
+          const completionSound = new Audio('/audio/completion.mp3');
+          completionSound.play().catch(error => {
+            console.error("Completion sound playback failed:", error);
           });
         }
       } else {
