@@ -21,7 +21,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     character: "ಅ",
     name: "a",
     pronunciation: "a as in 'america'",
-    examples: ["ಅಮ್ಮ (amma) - mother", "ಅಪ್ಪ (appa) - father"],
+    examples: ["ಅಪ್ಪ (appa) - father", "ಅಮ್ಮ (amma) - mother"],
     category: "vowel",
     audio: "/audio/1.mp3",
     word: 'ಅಪ್ಪ',

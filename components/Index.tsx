@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Hero3D from './Hero3D';
 import AlphabetCard from './AlphabetCard';
 import Footer from './Footer';
+import Link from "next/link";
 import { kannadaAlphabet } from '../lib/alphabetData';
 import { Button } from "../components/ui/button";
 import { ArrowRight, BookOpen, Play, Star } from 'lucide-react';
@@ -44,10 +45,12 @@ const Index = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
-                  <Button className="btn-primary">
-                    Start Learning
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Link href="/learn">
+                    <Button className="btn-primary">
+                      Start Learning
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                   <Button variant="outline" className="border-2 border-kid-blue text-kid-blue hover:bg-kid-blue/10">
                     Watch Demo
                   </Button>
