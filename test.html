@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Pipeline Flowchart</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .box {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            width: 300px;
+        }
+        .arrow {
+            width: 20px;
+            height: 30px;
+            border-left: 3px solid black;
+            border-bottom: 3px solid black;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="flowchart">
+        <div class="box">Load Dataset</div>
+        <div class="arrow"></div>
+        <div class="box">Feature Engineering<br><small>(Handling Numerical & Categorical, One-Hot Encoding, Outliers Clamping)</small></div>
+        <div class="arrow"></div>
+        <div class="box">Feature Selection<br><small>(Chi-Square Test)</small></div>
+        <div class="arrow"></div>
+        <div class="box">Handling Class Imbalance<br><small>(SMOTE Analysis)</small></div>
+        <div class="arrow"></div>
+        <div class="box">Training Model</div>
+        <div class="arrow"></div>
+        <div class="box">Prediction & Evaluation</div>
+    </div>
+</body>
+</html>

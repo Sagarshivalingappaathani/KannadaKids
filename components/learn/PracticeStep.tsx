@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '../../components/ui/button';
-import { ArrowLeft, ArrowRight, Check, RefreshCw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, RefreshCw, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { letterStroke } from '@/lib/letterStroke';
 
 interface PracticeStepProps {
   letter: {
     id: string;
+    rank: number;
     character: string;
     name: string;
     pronunciation: string;
@@ -30,6 +32,127 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   const [guideOpacity, setGuideOpacity] = useState(0.1);
   const [letterPixels, setLetterPixels] = useState<boolean[][]>([]);
   
+
+  // New states for demo tracing
+  const [isShowingDemo, setIsShowingDemo] = useState(false);
+  const [demoProgress, setDemoProgress] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const currentStepRef = useRef(0);
+  
+  const startDemoTracing = useCallback(() => {
+
+    const TRACING_CONFIGS = {
+      baseSpeed: 10,         // Base number of steps per frame
+      speedCurve: 0.5,      // Controls how quickly speed increases (0-1)
+      minSpeed: 0.7,        // Minimum speed factor
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const strokePath = letterStroke[letter.rank-1].stroke;
+    const totalSteps = strokePath.length;
+
+    // Reset
+    currentStepRef.current = 0;
+    setIsShowingDemo(true);
+    setDemoProgress(0);
+
+    // Clear canvas
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw letter as guide
+    const fontSize = Math.min(canvas.width, canvas.height) * 0.8;
+    ctx.font = `bold ${fontSize}px 'Noto Sans Kannada', sans-serif`;
+    ctx.fillStyle = `rgba(0, 0, 0, 0.1)`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(letter.character, canvas.width / 2, canvas.height / 2);
+
+    // Animation function with non-linear speed
+    const animateTracing = () => {
+      if (!canvas || !ctx) return;
+
+      // Calculate dynamic speed based on current progress
+      const progressRatio = currentStepRef.current / totalSteps;
+      const speedFactor = Math.max(
+        TRACING_CONFIGS.minSpeed, 
+        1 - Math.pow(progressRatio, TRACING_CONFIGS.speedCurve)
+      );
+
+    // Calculate step increment
+    const stepIncrement = Math.max(
+      1, 
+      Math.floor(TRACING_CONFIGS.baseSpeed * speedFactor)
+    );
+
+      // Update current step
+      currentStepRef.current = Math.min(
+        totalSteps, 
+        currentStepRef.current + stepIncrement
+      );
+
+      // Clear previous drawing
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Redraw guide letter
+      ctx.font = `bold ${fontSize}px 'Noto Sans Kannada', sans-serif`;
+      ctx.fillStyle = `rgba(0, 0, 0, 0.1)`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(letter.character, canvas.width / 2, canvas.height / 2);
+
+      // Draw tracing path
+      ctx.beginPath();
+      ctx.strokeStyle = '#7c3aed';
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      // Move to first point
+      ctx.moveTo(strokePath[0][0], strokePath[0][1]);
+
+      // Draw lines up to current step
+      for (let i = 1; i < currentStepRef.current; i++) {
+        ctx.lineTo(strokePath[i][0], strokePath[i][1]);
+      }
+      ctx.stroke();
+
+      // Update progress percentage
+      const progress = Math.floor((currentStepRef.current / totalSteps) * 100);
+      setDemoProgress(progress);
+
+      // Continue animation or stop
+      if (currentStepRef.current < totalSteps) {
+        animationRef.current = requestAnimationFrame(animateTracing);
+      } else {
+        // Reset after a short delay
+        setTimeout(() => {
+          setIsShowingDemo(false);
+          setDemoProgress(0);
+        }, 1000);
+      }
+    };
+
+    // Start animation
+    animationRef.current = requestAnimationFrame(animateTracing);
+  }, [letter.character]);
+
+  // Cleanup animation on unmount
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const canvas = document.getElementById('practiceCanvas') as HTMLCanvasElement;
     if (!canvas) return;
@@ -279,6 +402,17 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
               </div>
             </div>
             <div className="flex items-center gap-2">
+            <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={startDemoTracing}
+                className="text-kid-blue hover:bg-kid-blue/10 h-8"
+                disabled={isShowingDemo}
+              >
+                <Play className="h-4 w-4 mr-1" /> 
+                Show Demo
+              </Button>
+
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -300,12 +434,24 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
           
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all hover:shadow-xl">
             <canvas 
+              ref={canvasRef}
               id="practiceCanvas" 
               width="400" 
               height="320" 
               key={canvasKey}
               className="touch-none w-full h-72 cursor-crosshair"
             ></canvas>
+            {isShowingDemo && (
+              <div className="absolute inset-0 bg-white/50 flex items-center justify-center">
+                <motion.div 
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="text-kid-purple font-bold text-2xl"
+                >
+                  Tracing Demo: {demoProgress}%
+                </motion.div>
+              </div>
+            )}
           </div>
           
           <div className="mt-3 flex justify-between items-center">
