@@ -54,7 +54,6 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen py-20 px-4 md:px-8">
-      <Navbar />
       {/* Hero Section */}
       <section className="pt-24 pb-16">
         <motion.div 
