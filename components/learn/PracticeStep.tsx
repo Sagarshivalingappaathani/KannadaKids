@@ -384,7 +384,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center gap-2">
               <p className="text-gray-700 font-medium">
-                Draw the letter:
+                 Pen
               </p>
               <div className="flex items-center space-x-1">
                 <button 
@@ -410,7 +410,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
                 disabled={isShowingDemo}
               >
                 <Play className="h-4 w-4 mr-1" /> 
-                Show Demo
+                Demo
               </Button>
 
               <Button 
