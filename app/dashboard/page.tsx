@@ -163,30 +163,101 @@ export default function Dashboard() {
                   <Loader2 className="h-8 w-8 animate-spin text-kid-purple" />
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                  {kannadaAlphabet.map((letter) => {
-                    const letterProgress = progress.find(p => p.letter_id === letter.id);
-                    const mastery = letterProgress ? letterProgress.mastery_level : 0;
-                    const isCompleted = letterProgress ? letterProgress.completed : false;
+                <div className="space-y-6">
+                  {/* Svaragalu (Vowels) Section - 15 letters */}
+                  <div>
+                    <h3 className="font-medium text-lg mb-3">Svaragalu (Vowels)</h3>
+                    <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-5 gap-4">
+                      {kannadaAlphabet.slice(0, 15).map((letter) => {
+                        const letterProgress = progress.find(p => p.letter_id === letter.id);
+                        const mastery = letterProgress ? letterProgress.mastery_level : 0;
+                        const isCompleted = letterProgress ? letterProgress.completed : false;
 
-                    return (
-                      <div
-                        key={letter.id}
-                        className={`p-3 rounded-lg border ${isCompleted ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
-                      >
-                        <div className="flex flex-col items-center">
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${isCompleted ? 'bg-green-100' : 'bg-gray-100'}`}>
-                            <span className="text-xl font-bold">{letter.character}</span>
+                        return (
+                          <div
+                            key={letter.id}
+                            className={`p-3 rounded-lg border ${isCompleted ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
+                          >
+                            <div className="flex flex-col items-center">
+                              <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${isCompleted ? 'bg-green-100' : 'bg-gray-100'}`}>
+                                <span className="text-xl font-bold">{letter.character}</span>
+                              </div>
+                              <p className="text-sm font-medium text-center">{letter.name}</p>
+                              <div className="w-full mt-2">
+                                <Progress value={(mastery / 5) * 100} className="h-1" />
+                              </div>
+                              <p className="text-xs text-gray-500 mt-1">Level {mastery}/5</p>
+                            </div>
                           </div>
-                          <p className="text-sm font-medium text-center">{letter.name}</p>
-                          <div className="w-full mt-2">
-                            <Progress value={(mastery / 5) * 100} className="h-1" />
-                          </div>
-                          <p className="text-xs text-gray-500 mt-1">Level {mastery}/5</p>
-                        </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Vyanjanagalu (Consonants) Section */}
+                  <div>
+                    <h3 className="font-medium text-lg mb-3">Vyanjanagalu (Consonants)</h3>
+                    
+                    {/* First 25 consonants in a 5x5 grid */}
+                    <div className="mb-4">
+                      <h4 className="text-sm font-medium text-gray-500 mb-2">Main Consonants</h4>
+                      <div className="grid grid-cols-5 gap-4">
+                        {kannadaAlphabet.slice(15, 40).map((letter) => {
+                          const letterProgress = progress.find(p => p.letter_id === letter.id);
+                          const mastery = letterProgress ? letterProgress.mastery_level : 0;
+                          const isCompleted = letterProgress ? letterProgress.completed : false;
+
+                          return (
+                            <div
+                              key={letter.id}
+                              className={`p-3 rounded-lg border ${isCompleted ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
+                            >
+                              <div className="flex flex-col items-center">
+                                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${isCompleted ? 'bg-green-100' : 'bg-gray-100'}`}>
+                                  <span className="text-xl font-bold">{letter.character}</span>
+                                </div>
+                                <p className="text-sm font-medium text-center">{letter.name}</p>
+                                <div className="w-full mt-2">
+                                  <Progress value={(mastery / 5) * 100} className="h-1" />
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1">Level {mastery}/5</p>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
-                    );
-                  })}
+                    </div>
+                    
+                    {/* Remaining 9 consonants */}
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-500 mb-2">Additional Consonants</h4>
+                      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-4">
+                        {kannadaAlphabet.slice(40, 49).map((letter) => {
+                          const letterProgress = progress.find(p => p.letter_id === letter.id);
+                          const mastery = letterProgress ? letterProgress.mastery_level : 0;
+                          const isCompleted = letterProgress ? letterProgress.completed : false;
+
+                          return (
+                            <div
+                              key={letter.id}
+                              className={`p-3 rounded-lg border ${isCompleted ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
+                            >
+                              <div className="flex flex-col items-center">
+                                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${isCompleted ? 'bg-green-100' : 'bg-gray-100'}`}>
+                                  <span className="text-xl font-bold">{letter.character}</span>
+                                </div>
+                                <p className="text-sm font-medium text-center">{letter.name}</p>
+                                <div className="w-full mt-2">
+                                  <Progress value={(mastery / 5) * 100} className="h-1" />
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1">Level {mastery}/5</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </CardContent>
