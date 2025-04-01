@@ -168,7 +168,7 @@ export default function TestStep({
     const processedImage = finalCanvas.toDataURL("image/jpeg", 1.0);
 
     try {
-      const response = await fetch("http://localhost:8000/api/recognize", {
+      const response = await fetch("https://kannada-cnn.onrender.com/api/recognize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { baloo, nunito } from '@/lib/fonts';
 import { AuthProvider } from '@/lib/AuthContext';
+import Navbar from '@/components/NavBar';
 
 export const metadata = {
   title: 'KannadaKids - Learn Kannada Alphabet',
@@ -23,6 +24,7 @@ export default function RootLayout({
           <TooltipProvider>
             <Toaster />
             <Sonner />
+            <Navbar />
             {children}
           </TooltipProvider>
         </AuthProvider>

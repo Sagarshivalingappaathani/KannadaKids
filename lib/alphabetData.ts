@@ -1,4 +1,3 @@
-
 export type KannadaLetter = {
   id: string;
   rank: number;     
@@ -27,7 +26,7 @@ export const kannadaAlphabet: KannadaLetter[] = [
     word: 'ಅಪ್ಪ',
     image: '/images/words/1.jpg',
     transliteration: 'appa (father)',
-    exampleImages : ['/images/words/1.jpg', '/images/words/16.jpg']
+    exampleImages : ['/images/words/1.jpg', '/images/words/2.jpg']
   },
   
   {
@@ -40,9 +39,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/2.mp3",
     word: 'ಆನೆ',
-    image: '/images/words/2.jpg',
+    image: '/images/words/3.jpg',
     transliteration: 'aane (elephant)',
-    exampleImages : ['/images/words/2.jpg', '/images/words/17.jpg']
+    exampleImages : ['/images/words/3.jpg', '/images/words/4.jpg']
   },
   {
     id: "vowel-i",
@@ -54,9 +53,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/3.mp3",
     word: 'ಇಲಿ',
-    image: '/images/words/3.jpg',
+    image: '/images/words/5.jpg',
     transliteration: 'ili (mouse)',
-    exampleImages : ['/images/words/3.jpg', '/images/words/18.jpg']
+    exampleImages : ['/images/words/5.jpg', '/images/words/6.jpg']
   },
   {
     id: "vowel-ii",
@@ -68,9 +67,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/4.mp3",
     word: 'ಈಶ್ವರ',
-    image: '/images/words/4.jpg',
+    image: '/images/words/7.jpg',
     transliteration: 'eeshwar (god)',
-    exampleImages : ['/images/words/4.jpg', '/images/words/19.jpg']
+    exampleImages : ['/images/words/7.jpg', '/images/words/8.jpg']
   },
   {
     id: "vowel-u",
@@ -82,9 +81,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/5.mp3",
     word: 'ಉಪ್ಪು',
-    image: '/images/words/5.jpg',
+    image: '/images/words/9.jpg',
     transliteration: 'uppu (soup)',
-    exampleImages : ['/images/words/5.jpg', '/images/words/20.jpg']
+    exampleImages : ['/images/words/9.jpg', '/images/words/10.jpg']
   },
   {
     id: "vowel-uu",
@@ -96,9 +95,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/6.mp3",
     word: 'ಊಟ',
-    image: '/images/words/6.jpg',
+    image: '/images/words/11.jpg',
     transliteration: 'oot (food)',
-    exampleImages : ['/images/words/6.jpg', '/images/words/21.jpg']
+    exampleImages : ['/images/words/11.jpg', '/images/words/12.jpg']
   },
   {
     id: "vowel-ru",
@@ -110,9 +109,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/7.mp3",
     word: 'ಋಷಿ',
-    image: '/images/words/7.jpg',
+    image: '/images/words/13.jpg',
     transliteration: 'rishi (teacher)',
-    exampleImages : ['/images/words/7.jpg', '/images/words/22.jpg']
+    exampleImages : ['/images/words/13.jpg', '/images/words/14.jpg']
   },
   {
     id: "vowel-e",
@@ -124,9 +123,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/8.mp3",
     word: 'ಎಲೆ',
-    image: '/images/words/8.jpg',
+    image: '/images/words/15.jpg',
     transliteration: 'ele (leaf)',
-    exampleImages : ['/images/words/8.jpg', '/images/words/23.jpg']
+    exampleImages : ['/images/words/15.jpg', '/images/words/16.jpg']
   },
   {
     id: "vowel-ee",
@@ -138,9 +137,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/9.mp3",
     word: 'ಏಣಿ',
-    image: '/images/words/9.jpg',
+    image: '/images/words/17.jpg',
     transliteration: 'ene (river)',
-    exampleImages : ['/images/words/9.jpg', '/images/words/24.jpg']
+    exampleImages : ['/images/words/17.jpg', '/images/words/18.jpg']
   },
   {
     id: "vowel-ai",
@@ -152,9 +151,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/10.mp3",
     word: 'ಐದು',
-    image: '/images/words/10.jpg',
+    image: '/images/words/19.jpg',
     transliteration: 'aidu (five)',
-    exampleImages : ['/images/words/10.jpg', '/images/words/25.jpg']
+    exampleImages : ['/images/words/19.jpg', '/images/words/20.jpg']
   },
   {
     id: "vowel-o",
@@ -166,9 +165,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/11.mp3",
     word: 'ಒಂದು',
-    image: '/images/words/11.jpg',
+    image: '/images/words/21.jpg',
     transliteration: 'oondu (one)',
-    exampleImages : ['/images/words/11.jpg', '/images/words/26.jpg']
+    exampleImages : ['/images/words/21.jpg', '/images/words/22.jpg']
   },
   {
     id: "vowel-oo",
@@ -180,9 +179,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/12.mp3",
     word: 'ಓದು',
-    image: '/images/words/12.jpg',
+    image: '/images/words/23.jpg',
     transliteration: 'oodu (read)',
-    exampleImages : ['/images/words/12.jpg', '/images/words/27.jpg']
+    exampleImages : ['/images/words/23.jpg', '/images/words/24.jpg']
   },
   {
     id: "vowel-au",
@@ -194,9 +193,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/13.mp3",
     word: 'ಔಷಧ',
-    image: '/images/words/13.jpg',
+    image: '/images/words/25.jpg',
     transliteration: 'aushadha (medicine)',
-    exampleImages : ['/images/words/13.jpg', '/images/words/1.jpg']
+    exampleImages : ['/images/words/25.jpg', '/images/words/26.jpg']
   },
   
   {
@@ -209,9 +208,9 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/14.mp3",
     word: 'ಹಂಸ',
-    image: '/images/words/14.jpg',
+    image: '/images/words/27.jpg',
     transliteration: 'hans (horse)',
-    exampleImages : ['/images/words/14.jpg', '/images/words/1.jpg']
+    exampleImages : ['/images/words/27.jpg', '/images/words/28.jpg']
   },
   {
     id: "vowel-ahh",
@@ -223,8 +222,486 @@ export const kannadaAlphabet: KannadaLetter[] = [
     category: "vowel",
     audio: "/audio/15.mp3",
     word: 'ನಮಃ',
-    image: '/images/words/15.jpg',
+    image: '/images/words/29.jpg',
     transliteration: 'namah (salutation)',
-    exampleImages : ['/images/words/15.jpg', '/images/words/1.jpg']
+    exampleImages : ['/images/words/29.jpg', '/images/words/30.jpg']
+  },
+  {
+    id: "consonant-ka",
+    rank: 16,
+    character: "ಕ",
+    name: "ka",
+    pronunciation: "k as in 'kite'",
+    examples: ["ಕಮಲ (kamala) - lotus", "ಕಾಗೆ (kaage) - crow"],
+    category: "consonant",
+    audio: "/audio/16.mp3",
+    word: 'ಕಮಲ',
+    image: '/images/words/31.jpg',
+    transliteration: 'kamala (lotus)',
+    exampleImages: ['/images/words/31.jpg', '/images/words/32.jpg']
+  },
+  {
+    id: "consonant-kha",
+    rank: 17,
+    character: "ಖ",
+    name: "kha",
+    pronunciation: "kh as in 'khaki'",
+    examples: ["ಖಗೋಳ (khagola) - astronomy", "ಖನಿಜ (khanija) - mineral"],
+    category: "consonant",
+    audio: "/audio/17.mp3",
+    word: 'ಖಗೋಳ',
+    image: '/images/words/33.jpg',
+    transliteration: 'khagola (astronomy)',
+    exampleImages: ['/images/words/33.jpg', '/images/words/34.jpg']
+  },
+  {
+    id: "consonant-ga",
+    rank: 18,
+    character: "ಗ",
+    name: "ga",
+    pronunciation: "g as in 'go'",
+    examples: ["ಗಣಿತ (ganita) - mathematics", "ಗಾಳಿ (gaali) - wind"],
+    category: "consonant",
+    audio: "/audio/18.mp3",
+    word: 'ಗಣಿತ',
+    image: '/images/words/35.jpg',
+    transliteration: 'ganita (mathematics)',
+    exampleImages: ['/images/words/35.jpg', '/images/words/36.jpg']
+  },
+  {
+    id: "consonant-gha",
+    rank: 19,
+    character: "ಘ",
+    name: "gha",
+    pronunciation: "gh as in 'ghost'",
+    examples: ["ಘಟಕ (ghataka) - unit", "ಘನತೆ (ghanate) - density"],
+    category: "consonant",
+    audio: "/audio/19.mp3",
+    word: 'ಘಟಕ',
+    image: '/images/words/37.jpg',
+    transliteration: 'ghataka (unit)',
+    exampleImages: ['/images/words/37.jpg', '/images/words/38.jpg']
+  },
+  {
+    id: "consonant-nga",
+    rank: 20,
+    character: "ಙ",
+    name: "nga",
+    pronunciation: "ng as in 'sing'",
+    examples: ["ಮಂಗ (manga) - monkey", "ಅಂಗ (anga) - limb"],
+    category: "consonant",
+    audio: "/audio/20.mp3",
+    word: 'ಮಂಗ',
+    image: '/images/words/39.jpg',
+    transliteration: 'manga (monkey)',
+    exampleImages: ['/images/words/39.jpg', '/images/words/40.jpg']
+  },
+  {
+    id: "consonant-cha",
+    rank: 21,
+    character: "ಚ",
+    name: "cha",
+    pronunciation: "ch as in 'chair'",
+    examples: ["ಚಂದ್ರ (chandra) - moon", "ಚಿತ್ರ (chitra) - picture"],
+    category: "consonant",
+    audio: "/audio/21.mp3",
+    word: 'ಚಂದ್ರ',
+    image: '/images/words/41.jpg',
+    transliteration: 'chandra (moon)',
+    exampleImages: ['/images/words/41.jpg', '/images/words/42.jpg']
+  },
+  {
+    id: "consonant-chha",
+    rank: 22,
+    character: "ಛ",
+    name: "chha",
+    pronunciation: "chh as in 'church-hill' (aspirated)",
+    examples: ["ಛತ್ರಿ (chhatri) - umbrella", "ಛಾಯೆ (chhaaye) - shadow"],
+    category: "consonant",
+    audio: "/audio/22.mp3",
+    word: 'ಛತ್ರಿ',
+    image: '/images/words/43.jpg',
+    transliteration: 'chhatri (umbrella)',
+    exampleImages: ['/images/words/43.jpg', '/images/words/44.jpg']
+  },
+  {
+    id: "consonant-ja",
+    rank: 23,
+    character: "ಜ",
+    name: "ja",
+    pronunciation: "j as in 'jump'",
+    examples: ["ಜಲ (jala) - water", "ಜನ (jana) - people"],
+    category: "consonant",
+    audio: "/audio/23.mp3",
+    word: 'ಜಲ',
+    image: '/images/words/45.jpg',
+    transliteration: 'jala (water)',
+    exampleImages: ['/images/words/45.jpg', '/images/words/46.jpg']
+  },
+  {
+    id: "consonant-jha",
+    rank: 24,
+    character: "ಝ",
+    name: "jha",
+    pronunciation: "jh as in 'hedge-hog' (aspirated)",
+    examples: ["ಝರಿ (jhari) - stream", "ಝಂಕಾರ (jhankaar) - jingle"],
+    category: "consonant",
+    audio: "/audio/24.mp3",
+    word: 'ಝರಿ',
+    image: '/images/words/47.jpg',
+    transliteration: 'jhari (stream)',
+    exampleImages: ['/images/words/47.jpg', '/images/words/48.jpg']
+  },
+  {
+    id: "consonant-nya",
+    rank: 25,
+    character: "ಞ",
+    name: "nya",
+    pronunciation: "ny as in 'canyon'",
+    examples: ["ಪಞ್ಚ (pancha) - five", "ಕಞ್ಚು (kanchu) - bronze"],
+    category: "consonant",
+    audio: "/audio/25.mp3",
+    word: 'ಪಞ್ಚ',
+    image: '/images/words/49.jpg',
+    transliteration: 'pancha (five)',
+    exampleImages: ['/images/words/49.jpg', '/images/words/50.jpg']
+  },
+  {
+    id: "consonant-ta",
+    rank: 26,
+    character: "ಟ",
+    name: "ta",
+    pronunciation: "t as in 'top' (retroflex)",
+    examples: ["ಟೊಮೆಟೊ (tometo) - tomato", "ಪೆಟ್ಟಿಗೆ (pettige) - box"],
+    category: "consonant",
+    audio: "/audio/26.mp3",
+    word: 'ಟೊಮೆಟೊ',
+    image: '/images/words/51.jpg',
+    transliteration: 'tometo (tomato)',
+    exampleImages: ['/images/words/51.jpg', '/images/words/52.jpg']
+  },
+  {
+    id: "consonant-tha",
+    rank: 27,
+    character: "ಠ",
+    name: "tha",
+    pronunciation: "th as in 'thump' (retroflex, aspirated)",
+    examples: ["ಠಾಣೆ (thaane) - police station", "ಕಠೋರ (kathora) - harsh"],
+    category: "consonant",
+    audio: "/audio/27.mp3",
+    word: 'ಠಾಣೆ',
+    image: '/images/words/53.jpg',
+    transliteration: 'thaane (police station)',
+    exampleImages: ['/images/words/53.jpg', '/images/words/54.jpg']
+  },
+  {
+    id: "consonant-da",
+    rank: 28,
+    character: "ಡ",
+    name: "da",
+    pronunciation: "d as in 'dog' (retroflex)",
+    examples: ["ಡಬ್ಬಿ (dabbi) - box", "ಹುಡುಗ (huduga) - boy"],
+    category: "consonant",
+    audio: "/audio/28.mp3",
+    word: 'ಡಬ್ಬಿ',
+    image: '/images/words/55.jpg',
+    transliteration: 'dabbi (box)',
+    exampleImages: ['/images/words/55.jpg', '/images/words/56.jpg']
+  },
+  {
+    id: "consonant-dha",
+    rank: 29,
+    character: "ಢ",
+    name: "dha",
+    pronunciation: "dh as in 'adhere' (retroflex, aspirated)",
+    examples: ["ಢಾಕೆ (dhaake) - drum", "ಢಾಲು (dhaalu) - shield"],
+    category: "consonant",
+    audio: "/audio/29.mp3",
+    word: 'ಢಾಕೆ',
+    image: '/images/words/57.jpg',
+    transliteration: 'dhaake (drum)',
+    exampleImages: ['/images/words/57.jpg', '/images/words/58.jpg']
+  },
+  {
+    id: "consonant-na",
+    rank: 30,
+    character: "ಣ",
+    name: "na",
+    pronunciation: "n as in 'under' (retroflex)",
+    examples: ["ಗುಣ (guna) - quality", "ಕಾರಣ (kaarana) - reason"],
+    category: "consonant",
+    audio: "/audio/30.mp3",
+    word: 'ಗುಣ',
+    image: '/images/words/59.jpg',
+    transliteration: 'guna (quality)',
+    exampleImages: ['/images/words/59.jpg', '/images/words/60.jpg']
+  },
+  {
+    id: "consonant-tha-dental",
+    rank: 31,
+    character: "ತ",
+    name: "tha",
+    pronunciation: "th as in 'thumb' (dental)",
+    examples: ["ತಾಯಿ (taayi) - mother", "ತಲೆ (tale) - head"],
+    category: "consonant",
+    audio: "/audio/31.mp3",
+    word: 'ತಾಯಿ',
+    image: '/images/words/61.jpg',
+    transliteration: 'taayi (mother)',
+    exampleImages: ['/images/words/61.jpg', '/images/words/62.jpg']
+  },
+  {
+    id: "consonant-thha",
+    rank: 32,
+    character: "ಥ",
+    name: "thha",
+    pronunciation: "thh as in 'lighthouse' (dental, aspirated)",
+    examples: ["ಥಟ್ಟನೆ (thattane) - suddenly", "ಪಥ (patha) - path"],
+    category: "consonant",
+    audio: "/audio/32.mp3",
+    word: 'ಥಟ್ಟನೆ',
+    image: '/images/words/63.jpg',
+    transliteration: 'thattane (suddenly)',
+    exampleImages: ['/images/words/63.jpg', '/images/words/64.jpg']
+  },
+  {
+    id: "consonant-da-dental",
+    rank: 33,
+    character: "ದ",
+    name: "da",
+    pronunciation: "d as in 'day' (dental)",
+    examples: ["ದೇಶ (desha) - country", "ದಿನ (dina) - day"],
+    category: "consonant",
+    audio: "/audio/33.mp3",
+    word: 'ದೇಶ',
+    image: '/images/words/65.jpg',
+    transliteration: 'desha (country)',
+    exampleImages: ['/images/words/65.jpg', '/images/words/66.jpg']
+  },
+  {
+    id: "consonant-dhha",
+    rank: 34,
+    character: "ಧ",
+    name: "dhha",
+    pronunciation: "dh as in 'dharma' (dental, aspirated)",
+    examples: ["ಧರ್ಮ (dharma) - righteousness", "ಧೈರ್ಯ (dhairya) - courage"],
+    category: "consonant",
+    audio: "/audio/34.mp3",
+    word: 'ಧರ್ಮ',
+    image: '/images/words/67.jpg',
+    transliteration: 'dharma (righteousness)',
+    exampleImages: ['/images/words/67.jpg', '/images/words/68.jpg']
+  },
+  {
+    id: "consonant-na-dental",
+    rank: 35,
+    character: "ನ",
+    name: "na",
+    pronunciation: "n as in 'name' (dental)",
+    examples: ["ನಾಯಿ (naayi) - dog", "ನದಿ (nadi) - river"],
+    category: "consonant",
+    audio: "/audio/35.mp3",
+    word: 'ನಾಯಿ',
+    image: '/images/words/69.jpg',
+    transliteration: 'naayi (dog)',
+    exampleImages: ['/images/words/69.jpg', '/images/words/70.jpg']
+  },
+  {
+    id: "consonant-pa",
+    rank: 36,
+    character: "ಪ",
+    name: "pa",
+    pronunciation: "p as in 'pen'",
+    examples: ["ಪುಸ್ತಕ (pustaka) - book", "ಪಕ್ಷಿ (pakshi) - bird"],
+    category: "consonant",
+    audio: "/audio/36.mp3",
+    word: 'ಪುಸ್ತಕ',
+    image: '/images/words/71.jpg',
+    transliteration: 'pustaka (book)',
+    exampleImages: ['/images/words/71.jpg', '/images/words/72.jpg']
+  },
+  {
+    id: "consonant-pha",
+    rank: 37,
+    character: "ಫ",
+    name: "pha",
+    pronunciation: "ph as in 'pharmacy' (aspirated)",
+    examples: ["ಫಲ (phala) - fruit", "ಫುಲ್ (phul) - flower"],
+    category: "consonant",
+    audio: "/audio/37.mp3",
+    word: 'ಫಲ',
+    image: '/images/words/73.jpg',
+    transliteration: 'phala (fruit)',
+    exampleImages: ['/images/words/73.jpg', '/images/words/74.jpg']
+  },
+  {
+    id: "consonant-ba",
+    rank: 38,
+    character: "ಬ",
+    name: "ba",
+    pronunciation: "b as in 'ball'",
+    examples: ["ಬಾಗಿಲು (baagilu) - door", "ಬೆಟ್ಟ (betta) - hill"],
+    category: "consonant",
+    audio: "/audio/38.mp3",
+    word: 'ಬಾಗಿಲು',
+    image: '/images/words/75.jpg',
+    transliteration: 'baagilu (door)',
+    exampleImages: ['/images/words/75.jpg', '/images/words/76.jpg']
+  },
+  {
+    id: "consonant-bha",
+    rank: 39,
+    character: "ಭ",
+    name: "bha",
+    pronunciation: "bh as in 'abhor' (aspirated)",
+    examples: ["ಭಾಷೆ (bhaashe) - language", "ಭಾರತ (bhaarata) - India"],
+    category: "consonant",
+    audio: "/audio/39.mp3",
+    word: 'ಭಾಷೆ',
+    image: '/images/words/77.jpg',
+    transliteration: 'bhaashe (language)',
+    exampleImages: ['/images/words/77.jpg', '/images/words/78.jpg']
+  },
+  {
+    id: "consonant-ma",
+    rank: 40,
+    character: "ಮ",
+    name: "ma",
+    pronunciation: "m as in 'mother'",
+    examples: ["ಮನೆ (mane) - house", "ಮಗು (magu) - child"],
+    category: "consonant",
+    audio: "/audio/40.mp3",
+    word: 'ಮನೆ',
+    image: '/images/words/79.jpg',
+    transliteration: 'mane (house)',
+    exampleImages: ['/images/words/79.jpg', '/images/words/80.jpg']
+  },
+  {
+    id: "consonant-ya",
+    rank: 41,
+    character: "ಯ",
+    name: "ya",
+    pronunciation: "y as in 'yes'",
+    examples: ["ಯಮುನಾ (yamuna) - Yamuna river", "ಯುದ್ಧ (yuddha) - war"],
+    category: "consonant",
+    audio: "/audio/41.mp3",
+    word: 'ಯಮುನಾ',
+    image: '/images/words/81.jpg',
+    transliteration: 'yamuna (Yamuna river)',
+    exampleImages: ['/images/words/81.jpg', '/images/words/82.jpg']
+  },
+  {
+    id: "consonant-ra",
+    rank: 42,
+    character: "ರ",
+    name: "ra",
+    pronunciation: "r as in 'run'",
+    examples: ["ರವಿ (ravi) - sun", "ರಾತ್ರಿ (raatri) - night"],
+    category: "consonant",
+    audio: "/audio/42.mp3",
+    word: 'ರವಿ',
+    image: '/images/words/83.jpg',
+    transliteration: 'ravi (sun)',
+    exampleImages: ['/images/words/83.jpg', '/images/words/84.jpg']
+  },
+  {
+    id: "consonant-la",
+    rank: 43,
+    character: "ಲ",
+    name: "la",
+    pronunciation: "l as in 'lake'",
+    examples: ["ಲವಣ (lavana) - salt", "ಲೋಕ (loka) - world"],
+    category: "consonant",
+    audio: "/audio/43.mp3",
+    word: 'ಲವಣ',
+    image: '/images/words/85.jpg',
+    transliteration: 'lavana (salt)',
+    exampleImages: ['/images/words/85.jpg', '/images/words/86.jpg']
+  },
+  {
+    id: "consonant-va",
+    rank: 44,
+    character: "ವ",
+    name: "va",
+    pronunciation: "v as in 'van'",
+    examples: ["ವಾಹನ (vaahana) - vehicle", "ವಿದ್ಯೆ (vidye) - education"],
+    category: "consonant",
+    audio: "/audio/44.mp3",
+    word: 'ವಾಹನ',
+    image: '/images/words/87.jpg',
+    transliteration: 'vaahana (vehicle)',
+    exampleImages: ['/images/words/87.jpg', '/images/words/88.jpg']
+  },
+  {
+    id: "consonant-sha",
+    rank: 45,
+    character: "ಶ",
+    name: "sha",
+    pronunciation: "sh as in 'shine'",
+    examples: ["ಶಾಲೆ (shaale) - school", "ಶುಭ (shubha) - auspicious"],
+    category: "consonant",
+    audio: "/audio/45.mp3",
+    word: 'ಶಾಲೆ',
+    image: '/images/words/89.jpg',
+    transliteration: 'shaale (school)',
+    exampleImages: ['/images/words/89.jpg', '/images/words/90.jpg']
+  },
+  {
+    id: "consonant-sha-palatal",
+    rank: 46,
+    character: "ಷ",
+    name: "sha",
+    pronunciation: "sh as in 'shore' (retroflex)",
+    examples: ["ಷಡ್ಚಕ್ರ (shadchakra) - six chakras", "ಪುಷ್ಪ (pushpa) - flower"],
+    category: "consonant",
+    audio: "/audio/46.mp3",
+    word: 'ಪುಷ್ಪ',
+    image: '/images/words/91.jpg',
+    transliteration: 'pushpa (flower)',
+    exampleImages: ['/images/words/91.jpg', '/images/words/92.jpg']
+  },
+  {
+    id: "consonant-sa",
+    rank: 47,
+    character: "ಸ",
+    name: "sa",
+    pronunciation: "s as in 'sun'",
+    examples: ["ಸಹನೆ (sahane) - patience", "ಸರೋವರ (sarovara) - lake"],
+    category: "consonant",
+    audio: "/audio/47.mp3",
+    word: 'ಸಹನೆ',
+    image: '/images/words/93.jpg',
+    transliteration: 'sahane (patience)',
+    exampleImages: ['/images/words/93.jpg', '/images/words/94.jpg']
+  },
+  {
+    id: "consonant-ha",
+    rank: 48,
+    character: "ಹ",
+    name: "ha",
+    pronunciation: "h as in 'hat'",
+    examples: ["ಹಕ್ಕಿ (hakki) - bird", "ಹಲ್ಲು (hallu) - tooth"],
+    category: "consonant",
+    audio: "/audio/48.mp3",
+    word: 'ಹಕ್ಕಿ',
+    image: '/images/words/95.jpg',
+    transliteration: 'hakki (bird)',
+    exampleImages: ['/images/words/95.jpg', '/images/words/96.jpg']
+  },
+  {
+    id: "consonant-la-retroflex",
+    rank: 49,
+    character: "ಳ",
+    name: "la",
+    pronunciation: "l as in 'curl' (retroflex)",
+    examples: ["ಹುಳ (hula) - worm", "ಬೆಳೆ (bele) - crop"],
+    category: "consonant",
+    audio: "/audio/49.mp3",
+    word: 'ಹುಳ',
+    image: '/images/words/97.jpg',
+    transliteration: 'hula (worm)',
+    exampleImages: ['/images/words/97.jpg', '/images/words/98.jpg']
   }
 ];
+
+export default kannadaAlphabet;
