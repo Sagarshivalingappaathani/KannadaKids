@@ -151,10 +151,10 @@ export default function AnalyticsPage() {
       return 0;
     });
 
-    setFilteredLetters(filtered);
+    setFilteredLetters(filtered as LetterWithAnalytics[]);
   }, [analytics, searchTerm, currentSort, letterType]);
 
-  const handleSort = (column: string) => {
+  const handleSort = (column: keyof LetterWithAnalytics) => {
     setCurrentSort(prevSort => ({
       column,
       direction: prevSort.column === column && prevSort.direction === 'asc' ? 'desc' : 'asc'
