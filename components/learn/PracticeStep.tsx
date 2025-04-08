@@ -40,6 +40,9 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   const animationRef = useRef<number | null>(null);
   const currentStepRef = useRef(0);
   
+  const strokePath = letterStroke[letter.rank-1].stroke;
+  const totalSteps = strokePath.length;
+
   const startDemoTracing = useCallback(() => {
 
     const TRACING_CONFIGS = {
@@ -54,8 +57,7 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const strokePath = letterStroke[letter.rank-1].stroke;
-    const totalSteps = strokePath.length;
+    // here is the stroke code
 
     // Reset
     currentStepRef.current = 0;
@@ -402,17 +404,18 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
               </div>
             </div>
             <div className="flex items-center gap-2">
-            <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={startDemoTracing}
-                className="text-kid-blue hover:bg-kid-blue/10 h-8"
-                disabled={isShowingDemo}
-              >
-                <Play className="h-4 w-4 mr-1" /> 
-                Demo
-              </Button>
-
+              {totalSteps > 0 && 
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={startDemoTracing}
+                  className="text-kid-blue hover:bg-kid-blue/10 h-8"
+                  disabled={isShowingDemo}
+                >
+                  <Play className="h-4 w-4 mr-1" /> 
+                  Demo
+                </Button>
+              } 
               <Button 
                 variant="ghost" 
                 size="sm" 

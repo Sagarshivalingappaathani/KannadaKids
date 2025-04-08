@@ -17,7 +17,7 @@ interface TestStepProps {
     rank: number;
   };
   setCurrentStep: (step: number) => void;
-  updateProgress: (mastery: number, completed: boolean) => Promise<void>;
+  updateProgress: (mastery: number, completed: boolean, totalAttempts?: number, correctAttempts?: number, wrongAttempts?: number) => Promise<void>;
   currentMastery: number;
   loading: boolean;
   completed: boolean;
