@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { supabase } from '@/lib/supabase';
 import { kannadaAlphabet } from '@/lib/alphabetData';
 import { Progress } from '@/components/ui/progress';
+import { Button } from '../../components/ui/button';
 import { Loader2 } from 'lucide-react';
 
 // Progress interface
@@ -102,6 +103,17 @@ export default function Dashboard() {
                     <span className="text-sm font-medium">{Math.round(progressPercentage)}%</span>
                   </div>
                   <Progress value={progressPercentage} className="h-2" />
+
+                  {/* Added this new code just a button */}
+                  <div className="pt-3">
+                    <Button 
+                      onClick={() => router.push('/analytics')}
+                      className="w-full bg-kid-purple hover:bg-kid-purple/90 text-white"
+                    >
+                      View Detailed Analytics
+                    </Button>
+                  </div>
+
                 </div>
               </CardContent>
             </Card>
@@ -231,7 +243,7 @@ export default function Dashboard() {
                     {/* Remaining 9 consonants */}
                     <div>
                       <h4 className="text-sm font-medium text-gray-500 mb-2">Additional Consonants</h4>
-                      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-4">
                         {kannadaAlphabet.slice(40, 49).map((letter) => {
                           const letterProgress = progress.find(p => p.letter_id === letter.id);
                           const mastery = letterProgress ? letterProgress.mastery_level : 0;
