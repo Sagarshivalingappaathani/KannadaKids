@@ -13,15 +13,7 @@ import { Loader2, BarChart3, AlertTriangle, ChevronLeft, Trophy, Search } from '
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader,TableRow } from '@/components/ui/table';
 
 // Analytics interface
 interface LetterAnalytics {
@@ -29,7 +21,7 @@ interface LetterAnalytics {
   total_attempts: number;
   correct_attempts: number;
   wrong_attempts: number;
-  last_attempt_at: string;
+  last_practiced: string;
 }
 
 interface LetterWithAnalytics {
@@ -42,7 +34,7 @@ interface LetterWithAnalytics {
   correct_attempts: number;
   wrong_attempts: number;
   accuracy_rate: number;
-  last_attempt_at: string | null;
+  last_practiced: string | null;
 }
 
 export default function AnalyticsPage() {
@@ -82,6 +74,8 @@ export default function AnalyticsPage() {
         if (data) {
           setAnalytics(data);
         }
+        console.log("This is the console : ", data);
+
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -101,7 +95,7 @@ export default function AnalyticsPage() {
         total_attempts: 0,
         correct_attempts: 0,
         wrong_attempts: 0,
-        last_attempt_at: null
+        last_practiced: null
       };
       
       const accuracy = letterAnalytics.total_attempts > 0 
@@ -118,7 +112,7 @@ export default function AnalyticsPage() {
         correct_attempts: letterAnalytics.correct_attempts,
         wrong_attempts: letterAnalytics.wrong_attempts,
         accuracy_rate: accuracy,
-        last_attempt_at: letterAnalytics.last_attempt_at
+        last_practiced: letterAnalytics.last_practiced
       };
     });
 
@@ -381,8 +375,8 @@ export default function AnalyticsPage() {
                               </div>
                             </TableCell>
                             <TableCell className="text-right text-sm text-gray-500">
-                              {letter.last_attempt_at 
-                                ? new Date(letter.last_attempt_at).toLocaleDateString() 
+                              {letter.last_practiced 
+                                ? new Date(letter.last_practiced).toLocaleDateString() 
                                 : 'Never'}
                             </TableCell>
                           </TableRow>
