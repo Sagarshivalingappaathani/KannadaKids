@@ -38,8 +38,7 @@ export default function LearnPage() {
           acc[item.letter_id] = item;
           return acc;
         }, {});
-        console.log("This is the console : ", progressByLetterId);
-        
+
         setProgressData(progressByLetterId);
       } catch (error) {
         console.error('Error:', error);

@@ -179,7 +179,7 @@ export default function Dashboard() {
                   {/* Svaragalu (Vowels) Section - 15 letters */}
                   <div>
                     <h3 className="font-medium text-lg mb-3">Svaragalu (Vowels)</h3>
-                    <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-5 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
                       {kannadaAlphabet.slice(0, 15).map((letter) => {
                         const letterProgress = progress.find(p => p.letter_id === letter.id);
                         const mastery = letterProgress ? letterProgress.mastery_level : 0;
@@ -213,7 +213,7 @@ export default function Dashboard() {
                     {/* First 25 consonants in a 5x5 grid */}
                     <div className="mb-4">
                       <h4 className="text-sm font-medium text-gray-500 mb-2">Main Consonants</h4>
-                      <div className="grid grid-cols-5 gap-4">
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
                         {kannadaAlphabet.slice(15, 40).map((letter) => {
                           const letterProgress = progress.find(p => p.letter_id === letter.id);
                           const mastery = letterProgress ? letterProgress.mastery_level : 0;
