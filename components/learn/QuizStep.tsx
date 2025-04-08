@@ -17,20 +17,28 @@ interface QuizStepProps {
     examples: string[];
     audio?: string;
   };
+  currentMastery : any
   setCurrentStep: (step: number) => void;
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
-  currentMastery: number;
-  loading: boolean;
+  updateAttempts: any
   completed: boolean;
+  totalAttempts : any
+  correctAttempts : any
+  wrongAttempts : any
+  loading : any
 }
 
 export default function QuizStep({ 
   letter, 
   setCurrentStep, 
   updateProgress, 
+  updateAttempts,
   currentMastery, 
   loading, 
-  completed 
+  completed,
+  totalAttempts,
+  correctAttempts,
+  wrongAttempts
 }: QuizStepProps) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -109,19 +117,28 @@ export default function QuizStep({
     }
   };
 
-  const handleAnswerSelect = (answer: { name: string; audio: string }) => {
+  const handleAnswerSelect = async (answer: { name: string; audio: string }) => {
     setSelectedAnswer(answer.name);
-    setIsCorrect(answer.name === letter.name);
+    const isAnswerCorrect = answer.name === letter.name;
+    setIsCorrect(isAnswerCorrect);
     setAttemptCount(prev => prev + 1);
     
-    if (answer.name === letter.name) {
+    // Update attempt counts in state and database
+    const newTotalAttempts = totalAttempts + 1;
+    const newCorrectAttempts = isAnswerCorrect ? correctAttempts + 1 : correctAttempts;
+    const newWrongAttempts = isAnswerCorrect ? wrongAttempts : wrongAttempts + 1;
+    
+    // Call updateAttempts to update the database
+    await updateAttempts(newTotalAttempts, newCorrectAttempts, newWrongAttempts);
+    
+    if (isAnswerCorrect) {
       confetti({
         particleCount: 150,
         spread: 90,
         origin: { y: 0.6 },
         colors: ['#8A4FFF', '#FF4F8A', '#4F8AFF', '#4FFF8A']
       });
-
+  
       const successSound = new Audio('/audio/success.mp3');
       successSound.play().catch(error => {
         console.error("Success sound playback failed:", error);

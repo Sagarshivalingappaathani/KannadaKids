@@ -10,17 +10,21 @@ interface TestStepProps {
   letter: {
     id: string;
     character: string;
+    rank : any
     name: string;
     pronunciation: string;
     examples: string[];
     audio?: string;
-    rank: number;
   };
+  currentMastery : any
   setCurrentStep: (step: number) => void;
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
-  currentMastery: number;
-  loading: boolean;
+  updateAttempts: any
   completed: boolean;
+  totalAttempts : any
+  correctAttempts : any
+  wrongAttempts : any
+  loading : any
 }
 
 export default function TestStep({
@@ -29,7 +33,11 @@ export default function TestStep({
   currentMastery,
   setCurrentStep,
   loading,
-  completed
+  completed,
+  updateAttempts,
+  totalAttempts,
+  correctAttempts,
+  wrongAttempts
 }: TestStepProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -132,7 +140,7 @@ export default function TestStep({
       setIsProcessing(false);
       return;
     }
-
+  
     // Create a temporary canvas for resizing
     const tempCanvas = document.createElement("canvas");
     const scaleFactor = 4;
@@ -143,13 +151,13 @@ export default function TestStep({
       setIsProcessing(false);
       return;
     }
-
+  
     tempCtx.imageSmoothingEnabled = true;
     tempCtx.imageSmoothingQuality = 'high';
     tempCtx.fillStyle = "black";
     tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
     tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, tempCanvas.width, tempCanvas.height);
-
+  
     const finalCanvas = document.createElement("canvas");
     finalCanvas.width = 28;
     finalCanvas.height = 28;
@@ -158,15 +166,15 @@ export default function TestStep({
       setIsProcessing(false);
       return;
     }
-
+  
     finalCtx.imageSmoothingEnabled = true;
     finalCtx.imageSmoothingQuality = 'high';
     finalCtx.fillStyle = "black";
     finalCtx.fillRect(0, 0, 28, 28);
     finalCtx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, 28, 28);
-
+  
     const processedImage = finalCanvas.toDataURL("image/jpeg", 1.0);
-
+  
     try {
       const response = await fetch("https://kannada-cnn.onrender.com/api/recognize", {
         method: "POST",
@@ -175,17 +183,25 @@ export default function TestStep({
         },
         body: JSON.stringify({ image: processedImage }),
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to send image to server");
       }
-
+  
       const data = await response.json();
       setRecognitionResult(data.prediction);
       setAttempts(prev => prev + 1);
-
+      
+      // Calculate new attempt values
+      const newTotalAttempts = totalAttempts + 1;
+      let newCorrectAttempts = correctAttempts;
+      let newWrongAttempts = wrongAttempts;
+      
       if (data.prediction === letter.rank.toString()) {
+        // Increment successful attempts
         setSuccessfulAttempts(prev => prev + 1);
+        newCorrectAttempts += 1;
+        
         const successSound = new Audio('/audio/success.mp3');
         successSound.play().catch(error => {
           console.error("Success sound playback failed:", error);
@@ -198,13 +214,19 @@ export default function TestStep({
         });
         setMessage("Correct! Well done! 🎉");
       } else {
+        // Increment wrong attempts
+        newWrongAttempts += 1;
+        
         const failureSound = new Audio('/audio/error.mp3');
         failureSound.play().catch(error => {
           console.error("Failure sound playback failed:", error);
         });
         setMessage(`Let's try again! Try drawing the letter "${letter.character}" more clearly.`);
       }
-
+      
+      // Update attempts in database
+      await updateAttempts(newTotalAttempts, newCorrectAttempts, newWrongAttempts);
+  
       // Check if user has completed enough successful attempts
       if (successfulAttempts >= 2 && !completed) {
         await updateProgress(currentMastery + 1, false);

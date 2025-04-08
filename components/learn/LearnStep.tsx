@@ -14,7 +14,11 @@ interface LearnStepProps {
   };
   setCurrentStep: (step: number) => void;
   updateProgress: (mastery: number, completed: boolean) => Promise<void>;
+  updateAttempts: any
   completed: boolean;
+  totalAttempts : any
+  correctAttempts : any
+  wrongAttempts : any
 }
 
 export default function LearnStep({ letter, setCurrentStep, updateProgress, completed }: LearnStepProps) {
