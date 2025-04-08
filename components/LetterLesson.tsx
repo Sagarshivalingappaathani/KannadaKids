@@ -32,6 +32,10 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<any>(null);
+  const [totalAttempts, setTotalAttempts] = useState(0);
+  const [correctAttempts, setCorrectAttempts] = useState(0);
+  const [wrongAttempts, setWrongAttempts] = useState(0);
+
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -68,17 +72,16 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           if (error && error.code !== 'PGRST116') {
             throw error;
           }
-          
+
           if (data) {
+            console.log(data)
             setProgress(data);
             setMastery(data.mastery_level);
             setCompleted(data.completed);
             setCurrentStep(0)
-            // if (data.completed) {
-            //   setCurrentStep(0);
-            // } else if (data.mastery_level > 0) {
-            //   setCurrentStep(data.mastery_level);
-            // }
+            setTotalAttempts(data.total_attempts);
+            setCorrectAttempts(data.correct_attempts);
+            setWrongAttempts(data.wrong_attempts)
           }
         } catch (error) {
           console.error('Error fetching progress:', error);
@@ -102,7 +105,7 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     }
 
     setLoading(true);
-    console.log("updateProgress",newMastery, isCompleted);
+    console.log("updateProgress", newMastery, isCompleted);
     try {
       const now = new Date().toISOString();
 
@@ -163,6 +166,83 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
     }
   };
 
+  const updateAttempts = async (newTotalAttempts: number, newCorrectAttempts: number, newWrongAttempts: number) => {
+    if (!user) {
+      toast({
+        title: "Not logged in",
+        description: "Create an account to save your progress!",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    console.log("updateAttempts", newTotalAttempts, newCorrectAttempts, newWrongAttempts);
+
+    try {
+      const { data: existingData, error: fetchError } = await supabase
+        .from('learning_progress')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('letter_id', letter.id)
+        .maybeSingle();
+
+      if (fetchError && fetchError.code !== 'PGRST116') {
+        throw fetchError;
+      }
+
+      if (existingData) {
+        const { error } = await supabase
+          .from('learning_progress')
+          .update({
+            total_attempts: newTotalAttempts,
+            correct_attempts: newCorrectAttempts,
+            wrong_attempts: newWrongAttempts,
+            last_practiced: new Date().toISOString(),
+          })
+          .eq('id', existingData.id);
+
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('learning_progress')
+          .insert([
+            {
+              user_id: user.id,
+              letter_id: letter.id,
+              total_attempts: newTotalAttempts,
+              correct_attempts: newCorrectAttempts,
+              wrong_attempts: newWrongAttempts,
+              mastery_level: 0,
+              completed: false,
+              last_practiced: new Date().toISOString(),
+            },
+          ]);
+
+        if (error) throw error;
+      }
+
+      // Update local state
+      setTotalAttempts(newTotalAttempts);
+      setCorrectAttempts(newCorrectAttempts);
+      setWrongAttempts(newWrongAttempts);
+
+      toast({
+        title: "Attempts updated",
+        description: "Your learning attempts have been recorded.",
+      });
+    } catch (error) {
+      console.error('Error updating attempts:', error);
+      toast({
+        title: "Error saving attempts",
+        description: "There was a problem saving your attempts. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const CurrentStepComponent = steps[currentStep].component;
 
   return (
@@ -173,13 +253,13 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           Back to all letters
         </Link>
 
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }} 
-          animate={{ opacity: 1, y: 0 }} 
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           className="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
         >
           <h1 className="text-3xl font-bold flex items-center gap-3">
-            <motion.span 
+            <motion.span
               whileHover={{ scale: 1.1 }}
               className="w-16 h-16 rounded-2xl bg-gradient-to-r from-kid-purple/90 to-kid-purple flex items-center justify-center text-4xl font-bold text-white shadow-md"
             >
@@ -193,18 +273,17 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
               <motion.div
                 key={level}
                 initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ 
-                  scale: level <= mastery ? 1.1 : 1, 
-                  opacity: 1 
+                animate={{
+                  scale: level <= mastery ? 1.1 : 1,
+                  opacity: 1
                 }}
                 transition={{ delay: level * 0.1 }}
               >
                 <Star
-                  className={`h-6 w-6 ${
-                    level <= mastery 
-                      ? 'text-yellow-400 fill-yellow-400 drop-shadow-sm' 
+                  className={`h-6 w-6 ${level <= mastery
+                      ? 'text-yellow-400 fill-yellow-400 drop-shadow-sm'
                       : 'text-gray-300'
-                  }`}
+                    }`}
                 />
               </motion.div>
             ))}
@@ -215,13 +294,12 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`h-2 flex-1 rounded-full ${
-                index === currentStep
+              className={`h-2 flex-1 rounded-full ${index === currentStep
                   ? 'bg-kid-purple'
                   : index < currentStep
                     ? 'bg-kid-purple/40'
                     : 'bg-gray-200'
-              }`}
+                }`}
             />
           ))}
         </div>
@@ -238,9 +316,13 @@ export default function LetterLesson({ letter }: LetterLessonProps) {
         <CurrentStepComponent
           letter={letter}
           updateProgress={updateProgress}
+          updateAttempts={updateAttempts}
           currentMastery={mastery}
           setCurrentStep={setCurrentStep}
           completed={completed}
+          totalAttempts={totalAttempts}
+          correctAttempts={correctAttempts}
+          wrongAttempts={wrongAttempts}
           loading={loading}
         />
       </motion.div>
