@@ -176,7 +176,7 @@ export default function LearnPage() {
                 {/* Remaining 9 consonants */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-700 mb-3">Additional Consonants</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                     {kannadaAlphabet.slice(40, 49).map((letter) => {
                       const progress = progressData[letter.id];
                       const mastery = progress ? progress.mastery_level : 0;

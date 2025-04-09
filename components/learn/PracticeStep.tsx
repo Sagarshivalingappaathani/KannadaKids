@@ -40,8 +40,8 @@ export default function PracticeStep({ letter, setCurrentStep, updateProgress, c
   const animationRef = useRef<number | null>(null);
   const currentStepRef = useRef(0);
   
-  const strokePath = letterStroke[letter.rank-1].stroke;
-  const totalSteps = strokePath.length;
+  const strokePath = letterStroke[letter.rank-1]?.stroke;
+  const totalSteps = strokePath?.length;
 
   const startDemoTracing = useCallback(() => {
 
