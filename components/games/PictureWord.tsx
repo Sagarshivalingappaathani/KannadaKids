@@ -320,19 +320,6 @@ const PictureWordAssociation: React.FC = () => {
                   </div>
                 )}
               </div>
-
-              {/* Word */}
-              <div className="flex flex-col items-center">
-                <div className="text-3xl font-baloo mb-2">{currentWord.word}</div>
-                <div className="text-gray-500 mb-2">{currentWord.transliteration}</div>
-                <button
-                  className="flex items-center gap-1 text-blue-500 hover:text-blue-700"
-                  onClick={() => playWordAudio()}
-                >
-                  <Volume2 className="h-4 w-4" />
-                  <span>Listen</span>
-                </button>
-              </div>
             </div>
 
             {/* Options */}
