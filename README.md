@@ -29,12 +29,6 @@ The system is grounded in **User Experience (UX)** design principles such as acc
 
 ---
 
-## 🔑 Keywords
-
-Kannada Alphabet Learning • Interactive Learning • UX Design • Tracing-Based Learning • Gamification • Web-Based Education • Early Childhood Education • Cognitive Walkthrough
-
----
-
 ## 🚀 Features
 
 - ✏️ **Tracing Practice** with semi-transparent letters
